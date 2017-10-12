@@ -5,6 +5,8 @@ Xavier Bohorquez, Timmy Hoang, Seunghun Oh, and Richard Wan
 
 ---
 
+### User Stories
+
 #### User Social Media Input:
 A user inputs one or more his social media handle and give the user a unique ID in our database.
 This is the beginnings of the user using our product. The user begins by inputting any one of his social media handles. Since this project analyzes a user’s social media posts, the user must provide a social media handle to be analyze. The webapp will accept any one of the major social handles listed on the webapp and store the analyzed data under a unique identification of that user.
