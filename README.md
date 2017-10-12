@@ -4,5 +4,5 @@ This project is done as part of CS411 semester project. This web application ask
 
 ---
 #### Contributors 
-> Xavier Bohorquex, Timmy Hoang, Seunghun Oh, and Richard Wan
+Xavier Bohorquex, Timmy Hoang, Seunghun Oh, and Richard Wan
  
