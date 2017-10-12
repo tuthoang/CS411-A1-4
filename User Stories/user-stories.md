@@ -1,10 +1,7 @@
 # CS411 Project Assignment 2: Project User Stories
 
 ### Authors
-Xavier Bohorquez
-Timmy Hoang
-Seunghun Oh
-Richard Wan
+Xavier Bohorquez, Timmy Hoang, Seunghun Oh, and Richard Wan
 
 ---
 
