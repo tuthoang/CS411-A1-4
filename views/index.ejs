@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      CS 411 A1 4 Test
+    </title>
+
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        ?!?!!?!?!?asdsadas
+      </h1>
+      <input type="text" id="searchBar" placeholder="placeholder"></input>
+      <p id="searchValue">test</p>
+      <p id = "twitter"> twitter stuff </p>
+      <%- JSON.stringify(twitter) %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </body>
+</html>
+
+<script>
+  var textBox = document.getElementById('searchBar');
+
+  textBox.onkeydown = function(){
+    console.log(document.getElementById('searchValue').value)
+    document.getElementById('searchValue').innerText = textBox.value;
+  }
+
+</script>
