@@ -13,10 +13,12 @@
       <h1>
         ?!?!!?!?!?asdsadas
       </h1>
-      <input type="text" id="searchBar" placeholder="placeholder"></input>
+        <form id="twitterSearch" action="/search" method="post">
+          <input type="text" name="searchBar" placeholder="placeholder"></input>
+          <input type="submit" value="Submit">
+
+        </form>
       <p id="searchValue">test</p>
-      <p id = "twitter"> twitter stuff </p>
-      <%- JSON.stringify(twitter) %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
