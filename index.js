@@ -3,6 +3,7 @@ var path = require('path')
 var cors = require('cors');
 const bodyParser = require('body-parser')
 const Twit = require('twit')
+const async = require('async')
 const app = express()
 
 app.use(bodyParser.json());
@@ -27,13 +28,15 @@ app.get('/', function (req, res) {
 app.post('/search', function (req, res){
   var searchContents = req.body.searchBar;
   console.log(searchContents)
-  T.get('users/search', { q: searchContents, count: 100 }, function(err, data, response) {
-    // console.log(data)
-    j = data;
-  })
-  res.render('search',
-  {
-    twitter: j
+
+  T.get('users/search', { q: searchContents, count: 100 })
+  .catch(function (err){
+    console.log("FOUND ERROR: " + err)})
+  .then(function(result) {
+    res.render('search',
+    {
+      twitter: result.data
+    })
   })
 })
 
