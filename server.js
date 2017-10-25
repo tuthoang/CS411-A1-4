@@ -1,6 +1,6 @@
-var express = require('express')
-var path = require('path')
-var cors = require('cors');
+const express = require('express')
+const path = require('path')
+const cors = require('cors');
 const bodyParser = require('body-parser')
 const Twit = require('twit')
 const async = require('async')
@@ -17,9 +17,8 @@ app.use(cors())
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname , 'views'))
 
-var T = new Twit(JSON.parse(config))
+const T = new Twit(JSON.parse(config))
 
-var j
 app.get('/', function (req, res) {
   res.render('index')
 })
