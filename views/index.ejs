@@ -11,14 +11,13 @@
   <body>
     <div id="app">
       <h1>
-        ?!?!!?!?!?asdsadas
+        Social Media Sentiment Analysis
       </h1>
         <form id="twitterSearch" action="/search" method="post">
           <input type="text" name="searchBar" placeholder="placeholder"></input>
           <input type="submit" value="Submit">
-
         </form>
-      <p id="searchValue">test</p>
+      <p>Enter above the Twitter handle for the user you wish to search for</p>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -29,7 +28,6 @@
   var textBox = document.getElementById('searchBar');
 
   textBox.onkeydown = function(){
-    console.log(document.getElementById('searchValue').value)
     document.getElementById('searchValue').innerText = textBox.value;
   }
 
