@@ -1,13 +1,10 @@
-const express = require('express')
-const path = require('path')
-const cors = require('cors');
+var express = require('express')
+var path = require('path')
+var cors = require('cors');
 const bodyParser = require('body-parser')
 const Twit = require('twit')
 const async = require('async')
-
-const fs = require('fs')
-const config = fs.readFileSync('./config.json')
-
+const config = require('./config')
 const app = express()
 
 app.use(bodyParser.json());
@@ -17,7 +14,7 @@ app.use(cors())
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname , 'views'))
 
-var T = new Twit(JSON.parse(config))
+var T = new Twit(config)
 
 var j
 app.get('/', function (req, res) {
