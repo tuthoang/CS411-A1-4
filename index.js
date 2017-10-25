@@ -16,10 +16,10 @@ app.set('views', path.join(__dirname, 'views'))
 
 var j
 var T = new Twit({
-  consumer_key:         'A15zwJ94dD4puhGr6QBQKxWsd',
-  consumer_secret:      '0udsXOyiGrSt3i6lze0TQeNKaCmqlc4hzujMDCDGMXZ9QIVfgB',
-  access_token:         '4831224928-WSzUTsaFUUKWKaaaqVPJpcyNp9tBJEeYqnq3DfS',
-  access_token_secret:  '4j4ynkCV2QtSYIpok3wXoy09NrjA0WwdYJmTQCh83v9aT'
+  consumer_key:         '',
+  consumer_secret:      '',
+  access_token:         '',
+  access_token_secret:  ''
 })
 
 app.get('/', function (req, res) {
