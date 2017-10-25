@@ -39,5 +39,5 @@ app.post('/search', function (req, res){
 })
 
 app.listen(8890, function () {
-  console.log('Example app listening on port 8000!')
+  console.log('Example app listening on port 8890!')
 })
