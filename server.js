@@ -6,7 +6,7 @@ const Twit = require('twit')
 const async = require('async')
 
 const fs = require('fs')
-const config = fs.readFileSync('./config.json')
+const config = require('./config')
 
 const app = express()
 
@@ -17,17 +17,18 @@ app.use(cors())
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname , 'views'))
 
-const T = new Twit(JSON.parse(config))
+const T = new Twit(config.oauth)
 
 app.get('/', function (req, res) {
   res.render('index')
 })
 
 app.post('/search', function (req, res){
+  
   var searchContents = req.body.searchBar;
   console.log(searchContents)
 
-  T.get('users/search', { q: searchContents, count: 100 })
+  T.get('users/search', { q: searchContents, count: 20 })
   .catch(function (err){
     console.log("FOUND ERROR: " + err)})
   .then(function(result) {
