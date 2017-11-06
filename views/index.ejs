@@ -4,34 +4,24 @@
   <head>
     <title>
       CS 411 A1 4 Test
-      testetsedasdas
+
     </title>
 
   </head>
   <body>
     <div id="app">
-      <h1>
-        ?!?!!?!?!?asdsadas
-        test test test
-      </h1>
-        <form id="twitterSearch" action="/search" method="post">
-          <input type="text" name="searchBar" placeholder="placeholder"></input>
-          <input type="submit" value="Submit">
 
+        <form id="twitterSearch" action="/search" method="post">
+          <input type="text" name="searchBar" placeholder="Twitter User"></input>
+          <input type="submit" value="Submit">
         </form>
-      <p id="searchValue">test</p>
+        <form id="sentiment" action="/sentiment" method="post">
+          <input type="text" name="sentimentBox" placeholder="Sentiment Analysis"></input>
+          <input type="submit" value="Submit">
+        </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   </body>
 </html>
 
-<script>
-  var textBox = document.getElementById('searchBar');
-
-  textBox.onkeydown = function(){
-    console.log(document.getElementById('searchValue').value)
-    document.getElementById('searchValue').innerText = textBox.value;
-  }
-
-</script>
