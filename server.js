@@ -6,12 +6,9 @@ const Twit = require('twit')
 
 const fs = require('fs')
 const config = require('./config')
-<<<<<<< HEAD
 const search = require('./routes/search')
 const sentiment = require('./routes/sentiment')
-=======
 
->>>>>>> origin/master
 const app = express()
 
 app.use(bodyParser.json());
