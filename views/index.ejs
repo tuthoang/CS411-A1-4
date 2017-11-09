@@ -3,30 +3,26 @@
 <html>
   <head>
     <title>
-      Landing Test
+      CS 411 A1 4 Test
     </title>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div id="app">
+
       <h1>
         Social Media Sentiment Analysis
       </h1>
-
-      <form id="twitterSearch" action="/search" method="post">
-        <input id="searchBar" type="text" name="searchBar" placeholder="Enter Twitter handle to search"></input>
-        <input id="searchButton" type="submit" value="Submit">
-      </form>
+        <form id="twitterSearch" action="/search" method="post">
+          <input type="text" name="searchBar" placeholder="Twitter User"></input>
+          <input type="submit" value="Submit">
+        </form>
+        <form id="sentiment" action="/sentiment" method="post">
+          <input type="text" name="sentimentBox" placeholder="Sentiment Analysis"></input>
+          <input type="submit" value="Submit">
+        </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   </body>
 </html>
-<script>
-  var textBox = document.getElementById('searchBar');
-
-  textBox.onkeydown = function(){
-    document.getElementById('searchValue').innerText = textBox.value;
-  }
-
-</script>
