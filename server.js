@@ -6,25 +6,27 @@ const Twit = require('twit')
 const async = require('async')
 
 const fs = require('fs')
-const config = require('./config')
+const config = require('./config.json')
 
 const app = express()
-
+console.log(typeof config)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
+app.use(express.static(path.join(__dirname, '/styles')));
+
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname , 'views'))
 
-const T = new Twit(config.oauth)
+const T = new Twit(config)
 
 app.get('/', function (req, res) {
   res.render('index')
 })
 
 app.post('/search', function (req, res){
-  
+
   var searchContents = req.body.searchBar;
   console.log(searchContents)
 
