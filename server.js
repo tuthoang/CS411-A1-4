@@ -10,7 +10,7 @@ const search = require('./routes/search')
 const sentiment = require('./routes/sentiment')
 
 const app = express()
-console.log(typeof config)
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
@@ -27,6 +27,6 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
-app.listen(8889, function () {
+app.listen(8890, function () {
   console.log('Example app listening on port 8890!')
 })
