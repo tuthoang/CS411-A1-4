@@ -6,7 +6,7 @@ const config = require('../config')
 const T = new Twit(config.oauth)
 
 router.post('/search', function (req, res){
-  
+
   var searchContents = req.body.searchBar;
   console.log(searchContents)
 
