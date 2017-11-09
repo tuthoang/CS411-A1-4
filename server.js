@@ -10,14 +10,15 @@ const search = require('./routes/search')
 const sentiment = require('./routes/sentiment')
 
 const app = express()
-
+console.log(typeof config)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
+app.use(express.static(path.join(__dirname, '/styles')));
+
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname , 'views'))
-
 
 app.use(search)
 app.use(sentiment)
