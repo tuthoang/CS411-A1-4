@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const config = require('../config')
-const Twit = require('twit')
+const config = require('../config/config');
+const Twit = require('twit');
 const indico = require('indico.io');
 
 const T = new Twit(config.oauth)
@@ -12,6 +12,12 @@ router.get('/', (req, res) => {
   res.send('api works');
 });
 
+router.get('/me', (req, res) => {
+    console.log("====================== API CALL =========================")
+    console.log("me api");
+    console.log(req.user);
+    res.json(req.user);
+  });
   
 router.post('/search', (req, res) => {
   T.get('users/search', { q: JSON.stringify(req.body.searchBar), count: 1 })
