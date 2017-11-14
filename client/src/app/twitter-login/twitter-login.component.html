@@ -1,7 +1,2 @@
-<a href="/auth/twitter">Login with twitter</a>
-
-<form #userForm = "ngForm" (ngSubmit) = "onSubmit(userForm)">
-  <div class ="form-group">
-    <input type="submit" value="Get User Info">
-  </div>
-</form> 
+<button mat><a href="/auth/twitter">Login with twitter</a></button>
+<button (click)="myEvent()" mat-fab>User Info</button>

@@ -11,10 +11,8 @@ import {Router} from '@angular/router';
 export class TwitterLoginComponent {
 
   constructor(public http : Http){}
-  onSubmit(form:NgForm){
 
-    console.log("do something")    
-    // API call
+  myEvent() {
     this.http.get('http://localhost:3000/api/me').subscribe();
   }
 }

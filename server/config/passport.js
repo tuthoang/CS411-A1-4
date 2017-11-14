@@ -2,13 +2,6 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const config = require('./config')
 
 module.exports = function(passport) {
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-
-  passport.deserializeUser(function(user, done) {
-    done(null, user);
-  });
 
   passport.use(new TwitterStrategy({
       consumerKey: config.oauth.consumer_key,
@@ -25,4 +18,16 @@ module.exports = function(passport) {
     }
   ));
 
+  passport.serializeUser(function(user, done) {
+    console.log('in serialize, setting id on session:', user.id)
+    done(null, user);
+  });
+
+  passport.deserializeUser(function(user, done) {
+    console.log('in deserialize with id', user.id)
+   // User.findOne({twitterID: id}, function (err, user) {
+   //     done(err, user)
+   // })
+    done(null, user);
+  });
 }
