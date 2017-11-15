@@ -13,6 +13,8 @@ const passportRoute = require('./routes/twitterLogin')(passport);
 const app = express();
 
 require('./config/passport')(passport); // pass passport for configuration
+// Connection to mongo server
+var mongo = require('./config/mongo')
 
 // Parsers for POST data
 app.use(bodyParser.json());
