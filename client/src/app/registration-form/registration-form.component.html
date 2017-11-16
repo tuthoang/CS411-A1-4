@@ -1,40 +1,25 @@
-<!-- <form [formGroup]="regForm" novalidate>
-  <div class="form-group">
-    <div class="input">
-      <label>Email</label>
-      <input type="text" placeholder="email" ngModel formControlName="email">
-    </div>
-    <div class="input">
-      <label>Password</label>
-      <input type="password" ngModel formControlName="password">
-    </div>
-    <div class="input">
-      <input type="submit" value="Login">
-    </div>
-</div>
-</form>
-
-<p>Form value: {{ regForm.value | json }}</p>
-<p>Form status: {{ regForm.status | json }}</p>
- -->
-<div *ngIf="!email; else forminfo">
+<div *ngIf="!matchPW; else forminfo">
   <form [formGroup]="rForm" (ngSubmit)="onSubmit(rForm.value)">
     <div class="form-container">
       <div class="row columns">
-        <h1>My Reactive Form</h1>
+        <h1>My Registration Form</h1>
         <label>email
           <input type="text" formControlName="email">
         </label>
-        <!-- This goes underneath the Name label -->
         <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">{{ emailError }}</div>
 
         <label>password
           <input type="password" formControlName="password">
         </label>
-        <!-- This goes underneath the Description label -->
-        <div class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{passwordError}}</div>
+        <label>confirm password
+          <input type="password" formControlName="confirmPassword">
+        </label>
 
-        <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
+        <div class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{passwordError}}</div>
+        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors.MatchPassword">Password not match</div>
+        <!-- <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid"> -->
+
+        <input type="submit" class="button expanded" value="Submit Form">
       </div>
     </div>
   </form>
@@ -46,6 +31,8 @@
         <h1>{{ email }}</h1>
 
         <p>{{ password }}</p>
+        <p>{{ confirmPassword }} </p>
+        <p> {{ password == confirmPassword }}</p>
     </div>
   </div>
 </ng-template>
