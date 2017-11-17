@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../config/config');
+var User = require('../models/Users');
+
 const Twit = require('twit');
 const indico = require('indico.io');
 
@@ -42,4 +44,22 @@ router.post('/sentiment', (req,res) => {
     console.log(err.message)
   });
 })
+
+router.post('/create', (req,res) => {
+      // grab the user model
+
+    // create a new user
+    var newUser = User({
+      email: 'starlord55',
+      password: 'password'
+    });
+
+    // save the user
+    newUser.save(function(err) {
+      if (err) throw err;
+
+      console.log('User created!');
+    });
+})
+
 module.exports = router;

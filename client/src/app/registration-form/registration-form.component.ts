@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { PasswordValidation } from './password-validation.validator';
 @Component({
   selector: 'registration-form',
   templateUrl: './registration-form.component.html',
@@ -10,19 +11,27 @@ export class RegistrationFormComponent {
   post:any;                     // A property for our submitted form
   email:string = '';
   password:string = '';
+  confirmPassword:string = '';
   emailError:string = 'Enter a valid email';
   passwordError:string = 'Enter a password of atleast 5 characters';
+  mismatch:string = 'Passwords dont match';
+  matchPW: boolean = false;
   constructor(private fb: FormBuilder) { 
-
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
-      'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])]
+      'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
+      'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])]
+      },
+      {
+      validator: PasswordValidation.MatchPassword // custom validation method
     });
-
   }  
-    onSubmit(form) {
+
+  onSubmit(form) {
     this.email = form.email;
     this.password = form.password;
+    this.confirmPassword = form.confirmPassword;
+    if(this.password == this.confirmPassword) this.matchPW = true;
   }
   // constructor(private fb: FormBuilder) { // <--- inject FormBuilder
   //   this.createForm();
