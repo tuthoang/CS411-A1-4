@@ -5,16 +5,25 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
-
+var mongoose = require('mongoose');
 // Get our API routes
 const api = require('./routes/api');
 const passport = require('passport');
 const passportRoute = require('./routes/twitterLogin')(passport);
 const app = express();
 
-require('./config/passport')(passport); // pass passport for configuration
 // Connection to mongo server
-var mongo = require('./config/mongo')
+mongoose.connect('mongodb://localhost:27017/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
+
+require('./config/passport')(passport); // pass passport for configuration
+
+// var mongo = require('./config/mongo')
 
 // Parsers for POST data
 app.use(bodyParser.json());

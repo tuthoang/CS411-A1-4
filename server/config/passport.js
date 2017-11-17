@@ -1,6 +1,6 @@
 const TwitterStrategy = require('passport-twitter').Strategy;
-const LocalStrategy = require('passport-local').Strategy,
-var User = require('mongoose').model('User');
+const LocalStrategy = require('passport-local').Strategy;
+var User = require('../models/Users')
 
 const config = require('./config')
 
@@ -22,9 +22,9 @@ module.exports = function(passport) {
   // ));
 
   // Use local strategy
-  passport.use(new LocalStrategy(function(username, password, done) {
+  passport.use(new LocalStrategy(function(email, password, done) {
     User.findOne({
-      username: username
+      email: email
     }, function(err, user) {
       // When an error occurred
       if (err) {
@@ -32,14 +32,14 @@ module.exports = function(passport) {
       }
       
       // When user not found 
-      if (!user) {
+      if (!email) {
         return done(null, false, {
           message: 'Unknown user'
         });
       }
 
       // When the password is invalid
-      if (!user.authenticate(password)) {
+      if (!email.authenticate(password)) {
         return done(null, false, {
           message: 'Invalid password'
         });
@@ -49,15 +49,15 @@ module.exports = function(passport) {
     });
   }));
   passport.serializeUser(function(user, done) {
-    console.log('in serialize, setting id on session:', user.id)
+    console.log('in serialize, setting id on session:', email.id)
     done(null, user);
   });
 
   passport.deserializeUser(function(user, done) {
-    console.log('in deserialize with id', user.id)
+    console.log('in deserialize with id', email.id)
    // User.findOne({twitterID: id}, function (err, user) {
    //     done(err, user)
    // })
-    done(null, user);
+    done(null, email);
   });
 }
