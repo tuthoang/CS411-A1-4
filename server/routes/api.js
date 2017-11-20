@@ -9,6 +9,10 @@ const indico = require('indico.io');
 const T = new Twit(config.oauth)
 indico.apiKey = config.indico.apiKey
 
+
+//req.body ======= POST!
+//req.query ====== GET!
+
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works');
@@ -21,8 +25,8 @@ router.get('/me', (req, res) => {
     res.json(req.user);
   });
   
-router.post('/search', (req, res) => {
-  T.get('users/search', { q: JSON.stringify(req.body.searchBar), count: 1 })
+router.get('/search', (req, res) => {
+  T.get('users/search', { q: JSON.stringify(req.query.searchBar), count: 2 })
   .then(function(result) {
       console.log(result);
       res.json(result.data);
@@ -33,9 +37,9 @@ router.post('/search', (req, res) => {
   })
 })  
 
-router.post('/sentiment', (req,res) => {
+router.get('/sentiment', (req,res) => {
   // console.log(JSON.prase(req.body))
-  indico.emotion(JSON.stringify(req.body.sentimentBar))
+  indico.emotion(JSON.stringify(req.query.sentimentBar))
   .then(function(result){
     console.log(result);
     res.json(result)
