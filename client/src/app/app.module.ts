@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserXhr } from '@angular/http';
 import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
@@ -25,6 +26,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path:'search-twitter',component: SearchTwitterComponent},
       {path:'sentiment', component: SentimentComponent},

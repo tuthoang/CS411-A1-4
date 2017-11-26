@@ -6,7 +6,7 @@
         <label>email
           <input type="text" formControlName="email">
         </label>
-        <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">{{ emailError }}</div>
+        <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched && !rForms.controls['.email'].dirty">{{ emailError }}</div>
 
         <label>password
           <input type="password" formControlName="password">
@@ -16,7 +16,7 @@
         </label>
 
         <div class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{passwordError}}</div>
-        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].touched">Password not match</div>
+        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].touched">Passwords not match</div>
         <!-- <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid"> -->
 
         <input type="submit" class="button expanded" value="Submit Form">
