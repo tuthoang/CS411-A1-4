@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../config/config');
+const passport = require('passport');
 var User = require('../models/Users');
 
 const Twit = require('twit');
@@ -8,6 +9,8 @@ const indico = require('indico.io');
 
 const T = new Twit(config.oauth)
 indico.apiKey = config.indico.apiKey
+
+require('../config/passport')(passport); // pass passport for configuration
 
 //req.body ======= POST!
 //req.query ====== GET!
@@ -73,5 +76,14 @@ router.post('/create', (req,res) => {
     console.log('User created!');
   });
 })
+
+router.post('/login', passport.authenticate('local', {successRedirect:'/api/me', failureRedirect: '/api', failureFlash: true, session:true}),
+  function(req,res) {
+    // console.log('sucess')
+    req.flash('success_msg', 'logged in');
+    res.redirect('/');
+  })
+
+
 
 module.exports = router;

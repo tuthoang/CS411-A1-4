@@ -1,0 +1,16 @@
+<div>
+  <form #loginForm = "ngForm" (ngSubmit) = "onSubmit(loginForm)">
+    <div class="form-container">
+      <div class="row columns">
+        <h1>My Login Form</h1>
+        <label>email
+          <input ngModel name="email">
+        </label>
+        <label>password
+          <input ngModel type="password" name="password">
+        </label>
+        <input type="submit" class="button expanded" value="Submit">
+      </div>
+    </div>
+  </form>
+</div>

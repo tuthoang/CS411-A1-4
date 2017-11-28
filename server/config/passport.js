@@ -22,7 +22,11 @@ module.exports = function(passport) {
   // ));
 
   // Use local strategy
-  passport.use(new LocalStrategy(function(email, password, done) {
+  passport.use(new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password",
+    passReqToCallback : true // allows us to pass back the entire request to the callback
+  },function(req, email, password, done) {
     User.findOne({
       email: email
     }, function(err, user) {
@@ -32,32 +36,35 @@ module.exports = function(passport) {
       }
       
       // When user not found 
-      if (!email) {
+      if (!user) {
         return done(null, false, {
           message: 'Unknown user'
         });
       }
 
       // When the password is invalid
-      if (!email.authenticate(password)) {
-        return done(null, false, {
-          message: 'Invalid password'
-        });
-      }
-      
-      return done(null, user);
+      user.comparePassword(password, function(err,isMatch){
+        if(err) throw err;
+        if(isMatch){
+          console.log('logged');
+          return done(null,user);
+        } else{
+          return done(null,false, {message:'Invalid password'});
+        }
+      })
     });
   }));
+
   passport.serializeUser(function(user, done) {
-    console.log('in serialize, setting id on session:', email.id)
+    console.log('in serialize, setting id on session:', user.id)
     done(null, user);
   });
 
   passport.deserializeUser(function(user, done) {
-    console.log('in deserialize with id', email.id)
+    console.log('in deserialize with id', user.id)
    // User.findOne({twitterID: id}, function (err, user) {
    //     done(err, user)
    // })
-    done(null, email);
+    done(null, user);
   });
 }
