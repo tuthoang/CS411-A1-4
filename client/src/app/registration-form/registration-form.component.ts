@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordValidation } from './password-validation.validator';
+import { HttpParams, HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'registration-form',
   templateUrl: './registration-form.component.html',
@@ -16,7 +18,7 @@ export class RegistrationFormComponent {
   passwordError:string = 'Enter a password of atleast 5 characters';
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, public http: HttpClient) { 
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
@@ -32,6 +34,7 @@ export class RegistrationFormComponent {
     this.password = form.password;
     this.confirmPassword = form.confirmPassword;
     if(this.password == this.confirmPassword) this.matchPW = true;
+    this.http.post('/api/create', form).subscribe();
   }
   // constructor(private fb: FormBuilder) { // <--- inject FormBuilder
   //   this.createForm();

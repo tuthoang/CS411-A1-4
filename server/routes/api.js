@@ -9,7 +9,6 @@ const indico = require('indico.io');
 const T = new Twit(config.oauth)
 indico.apiKey = config.indico.apiKey
 
-
 //req.body ======= POST!
 //req.query ====== GET!
 
@@ -26,9 +25,9 @@ router.get('/me', (req, res) => {
   });
   
 router.get('/search', (req, res) => {
-  T.get('users/search', { q: JSON.stringify(req.query.searchBar), count: 2 })
+  T.get('users/search', { q: JSON.stringify(req.query.searchBar), count: 5 })
   .then(function(result) {
-      console.log(result);
+      // console.log(result);
       res.json(result.data);
       // res.send(result.data)
   })
@@ -37,6 +36,16 @@ router.get('/search', (req, res) => {
   })
 })  
 
+router.get('/tweets', (req,res) => {
+  T.get('/statuses/user_timeline', {user_id: 813286})
+  .then(function(result){
+    console.log(result.data[0].text)
+    res.json(result.data[0])
+  })
+  .catch(function (err){
+    console.log("FOUND ERROR: " + err.message)
+  })
+})
 router.get('/sentiment', (req,res) => {
   // console.log(JSON.prase(req.body))
   indico.emotion(JSON.stringify(req.query.sentimentBar))
@@ -50,20 +59,19 @@ router.get('/sentiment', (req,res) => {
 })
 
 router.post('/create', (req,res) => {
-      // grab the user model
 
-    // create a new user
-    var newUser = User({
-      email: 'starlord55',
-      password: 'password'
-    });
+  // create a new user
+  let newUser = User({
+    email: req.body.email,
+    password: req.body.password
+  });
 
-    // save the user
-    newUser.save(function(err) {
-      if (err) throw err;
+  // save the user
+  newUser.save(function(err) {
+    if (err) throw err;
 
-      console.log('User created!');
-    });
+    console.log('User created!');
+  });
 })
 
 module.exports = router;
