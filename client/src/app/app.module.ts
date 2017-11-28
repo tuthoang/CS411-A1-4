@@ -12,7 +12,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SentimentComponent } from './sentiment/sentiment.component';
 import { TwitterLoginComponent } from './twitter-login/twitter-login.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-import { TwitterUserService } from './twitter-user.service'
+import { TwitterUserService } from './twitter-user.service';
+import { LoginFormComponent } from './login-form/login-form.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TwitterUserService } from './twitter-user.service'
     SearchTwitterComponent,
     SentimentComponent,
     TwitterLoginComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

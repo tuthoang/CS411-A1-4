@@ -5,11 +5,13 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+
 // Get our API routes
 const api = require('./routes/api');
 const passport = require('passport');
-const passportRoute = require('./routes/twitterLogin')(passport);
+// const passportRoute = require('./routes/api')(passport);
 const app = express();
 
 // Connection to mongo server
@@ -21,7 +23,6 @@ db.once('open', function() {
 });
 
 
-require('./config/passport')(passport); // pass passport for configuration
 
 // var mongo = require('./config/mongo')
 
@@ -36,13 +37,6 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
-
-// passport.deserializeUser(function(user, done) {
-//   done(null, user);
-// });
 
 app.use(session({
   secret: 'mysecret',
@@ -51,12 +45,12 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 // const passportRoute = require('./routes/passport')(passport);
 
 // Set our api routes
 app.use('/api',api);
-app.use(passportRoute);
+// app.use(passportRoute);
 
 
 // Point static path to dist
