@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SentimentComponent } from './sentiment/sentiment.component';
 import { TwitterLoginComponent } from './twitter-login/twitter-login.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { TwitterUserService } from './twitter-user.service'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegistrationFormComponent } from './registration-form/registration-form
       ])
   ],
   providers: [    
-    {provide: BrowserXhr, useClass:CustExtBrowserXhr}
+    {provide: BrowserXhr, useClass:CustExtBrowserXhr},
+    TwitterUserService
   ],
   bootstrap: [AppComponent]
 })
