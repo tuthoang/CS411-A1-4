@@ -50,6 +50,7 @@ router.get('/tweets', (req,res) => {
     console.log("FOUND ERROR: " + err.message)
   })
 })
+
 router.get('/sentiment', (req,res) => {
   // console.log(JSON.prase(req.body))
   indico.emotion(JSON.stringify(req.query.sentimentBar))
