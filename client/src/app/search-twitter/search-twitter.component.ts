@@ -7,7 +7,7 @@ import { TwitterUserService } from '../twitter-user.service';
   templateUrl: './search-twitter.component.html',
   styleUrls: ['./search-twitter.component.css']
 })
-export class SearchTwitterComponent{  
+export class SearchTwitterComponent{
 
   usersList: any = null;
 
@@ -19,8 +19,12 @@ export class SearchTwitterComponent{
     });
     console.log('submitted');
   }
-  // usersList[1].id 
-  
+
+
+  public open(event, item, $http){
+    $http.get('http://localhost:3000/api/tweets').then(function(response){ console.log(response) });
+  }
+
   // // Move all of this into Service ?
   // usersList: any = null;
   // constructor(public http : HttpClient){}
@@ -42,7 +46,7 @@ export class SearchTwitterComponent{
   //     console.log("second relevant search:" + data[1].id);
   //     console.log(data[1].screen_name);
   //   });
-
-    // console.log(searchedUser);
+  //
+  //   console.log(searchedUser);
   // }
 }
