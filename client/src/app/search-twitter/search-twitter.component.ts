@@ -19,6 +19,8 @@ export class SearchTwitterComponent{
     });
     console.log('submitted');
   }
+  // usersList[1].id 
+  
   // // Move all of this into Service ?
   // usersList: any = null;
   // constructor(public http : HttpClient){}
