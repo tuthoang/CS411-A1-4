@@ -7,7 +7,7 @@ const session = require('express-session');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-
+const jwt = require('jsonwebtoken');
 // Get our API routes
 const api = require('./routes/api');
 const passport = require('passport');
@@ -38,14 +38,14 @@ app.all('/*', function(req, res, next) {
 });
 
 
-app.use(session({
-  secret: 'mysecret',
-  resave: false,
-  saveUninitialized: true
-}))
+// app.use(session({
+//   secret: 'mysecret',
+//   resave: false,
+//   saveUninitialized: true
+// }))
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+// app.use(passport.session());
+// app.use(flash());
 // const passportRoute = require('./routes/passport')(passport);
 
 // Set our api routes
