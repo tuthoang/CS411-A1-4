@@ -12,7 +12,7 @@
 <div *ngIf="usersList != null">
   <div *ngFor="let user of usersList">
     <!-- <button (click)="open($event, user.screen_name)">{{user.screen_name}}</button> -->
-    <button ng-click='click(user.screen_name)'>{{user.screen_name}}</button>
+    <button (click)='open($event, user.screen_name)'>{{user.screen_name}}</button>
 
   </div>
   <!-- {{usersList[0].id}}

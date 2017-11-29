@@ -11,7 +11,7 @@ export class SearchTwitterComponent{
 
   usersList: any = null;
 
-  constructor(private twitterService : TwitterUserService){}
+  constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
   onSubmit(form : NgForm) {
     this.twitterService.sendData(form).subscribe(data=> {
@@ -21,8 +21,11 @@ export class SearchTwitterComponent{
   }
 
 
-  public open(event, item, $http){
-    $http.get('http://localhost:3000/api/tweets').then(function(response){ console.log(response) });
+  public open(event, item){
+    let params = new HttpParams();
+    params = params.append('screen_name', item)
+    this.http.get('http://localhost:3000/api/tweets', {params: params})
+    .subscribe();
   }
 
   // // Move all of this into Service ?

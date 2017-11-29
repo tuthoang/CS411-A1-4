@@ -27,7 +27,7 @@ router.get('/me', (req, res) => {
     console.log(req.user);
     res.json(req.user);
   });
-  
+
 router.get('/search', (req, res) => {
   T.get('users/search', { q: JSON.stringify(req.query.searchBar), count: 5 })
   .then(function(result) {
@@ -38,13 +38,13 @@ router.get('/search', (req, res) => {
   .catch(function (err){
     console.log("FOUND ERROR: " + err.message)
   })
-})  
+})
 
 router.get('/tweets', (req,res) => {
-  T.get('/statuses/user_timeline', {user_id: 813286})
+  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5})
   .then(function(result){
     console.log(result.data[0].text)
-    res.json(result.data[0])
+    res.json(result.data)
   })
   .catch(function (err){
     console.log("FOUND ERROR: " + err.message)
