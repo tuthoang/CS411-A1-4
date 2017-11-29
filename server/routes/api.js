@@ -41,7 +41,7 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/tweets', (req,res) => {
-  T.get('/statuses/user_timeline', {screen_name: 'barackobama', count: 5})
+  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5})
   .then(function(result){
     console.log(result.data[0].text)
     res.json(result.data)

@@ -7,11 +7,11 @@ import { TwitterUserService } from '../twitter-user.service';
   templateUrl: './search-twitter.component.html',
   styleUrls: ['./search-twitter.component.css']
 })
-export class SearchTwitterComponent{  
+export class SearchTwitterComponent{
 
   usersList: any = null;
 
-  constructor(private twitterService : TwitterUserService){}
+  constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
   onSubmit(form : NgForm) {
     this.twitterService.sendData(form).subscribe(data=> {
@@ -19,8 +19,15 @@ export class SearchTwitterComponent{
     });
     console.log('submitted');
   }
-  // usersList[1].id 
-  
+
+
+  public open(event, item){
+    let params = new HttpParams();
+    params = params.append('screen_name', item)
+    this.http.get('http://localhost:3000/api/tweets', {params: params})
+    .subscribe();
+  }
+
   // // Move all of this into Service ?
   // usersList: any = null;
   // constructor(public http : HttpClient){}
@@ -42,7 +49,7 @@ export class SearchTwitterComponent{
   //     console.log("second relevant search:" + data[1].id);
   //     console.log(data[1].screen_name);
   //   });
-
-    // console.log(searchedUser);
+  //
+  //   console.log(searchedUser);
   // }
 }
