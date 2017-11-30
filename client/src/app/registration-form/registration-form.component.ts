@@ -18,7 +18,8 @@ export class RegistrationFormComponent {
   passwordError:string = 'Enter a password of atleast 5 characters';
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
-  constructor(private fb: FormBuilder, public http: HttpClient) { 
+  emailFocus: boolean = false;
+  constructor(private fb: FormBuilder, public http: HttpClient) {
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
@@ -27,7 +28,7 @@ export class RegistrationFormComponent {
       {
       validator: PasswordValidation.MatchPassword // custom validation method
     });
-  }  
+  }
 
   onSubmit(form) {
     this.email = form.email;
