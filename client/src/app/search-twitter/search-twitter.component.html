@@ -20,3 +20,18 @@
   {{usersList[1].id}}
   {{usersList[1].screen_name}} -->
 </div>
+<div *ngIf="tweetsList != null">
+  <div *ngFor="let tweet of tweetsList">
+    <ul>
+      <li> {{tweet.text}}</li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="sentimentsList != null">
+  <div *ngFor="let sentiment of sentimentsList">
+    <ul>
+      <li> {{sentiment.joy}}</li>
+    </ul>
+  </div>
+</div>

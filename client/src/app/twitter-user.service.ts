@@ -17,7 +17,7 @@ export class TwitterUserService {
   constructor(public http : HttpClient){}
 
 
-  sendData(form: NgForm){
+  getTwitterHandle(form: NgForm){
     interface twitterUsers {
       data: Array<any>
     }
@@ -35,5 +35,29 @@ export class TwitterUserService {
     //   // console.log(data[1].screen_name);
     // });
     // return this.usersList;
+  }
+
+  getTweets(item){
+    interface tweetsList{
+      data: Array<any>
+    }
+    let params = new HttpParams();
+    params = params.append('screen_name', item);
+    // params = params.append('tweet_mode','extended');
+    return this.http.get<tweetsList>('http://localhost:3000/api/tweets', {
+      params: params
+    });
+  }
+
+  sentimentAnalysis(tweet){
+    interface sentiments{
+      data: Array<any>
+    }
+    let params = new HttpParams();
+    params = params.append('tweet', tweet);
+    // params = params.append('tweet_mode','extended');
+    return this.http.get<sentiments>('http://localhost:3000/api/sentiment', {
+      params: params
+    });
   }
 }
