@@ -121,6 +121,7 @@ router.post("/login", function(req, res) {
     }
   });
 });
+// use res.header or something like that
 router.get("/secret", passport.authenticate('jwt', { session: false }), function(req, res){
   res.json({message:"Success! You can not see this without a token"});
 });

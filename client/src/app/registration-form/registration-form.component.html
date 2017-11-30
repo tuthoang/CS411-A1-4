@@ -3,10 +3,11 @@
     <div class="form-container">
       <div class="row columns">
         <h1>My Registration Form</h1>
-        <label>email
-          <input formControlName="email" name="email">
+        <label>Email
+          <input formControlName="email" (focus)="emailFocus = true" (blur)="emailFocus = false" name="email">
         </label>
-        <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').touched">{{ emailError }}</div>
+
+        <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
 
         <label>password
           <input type="password" formControlName="password" name="password">
@@ -15,11 +16,9 @@
           <input type="password" formControlName="confirmPassword" name="confirmPassword">
         </label>
 
-        <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty && rForm.get('password').touched">{{passwordError}}</div>
-        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.get('confirmPassword').dirty">Passwords not match</div>
+        <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty">{{passwordError}}</div>
+        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty">Passwords not match</div>
         <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
-
-        <!-- <input type="submit" class="button expanded" value="Submit Form"> -->
       </div>
     </div>
   </form>
@@ -36,4 +35,3 @@
     </div>
   </div>
 </ng-template>
-
