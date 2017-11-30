@@ -10,11 +10,12 @@ import { TwitterUserService } from '../twitter-user.service';
 export class SearchTwitterComponent{
 
   usersList: any = null;
-
+  tweetsList: any = null;
+  sentimentsList: Array<any> = [];
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
   onSubmit(form : NgForm) {
-    this.twitterService.sendData(form).subscribe(data=> {
+    this.twitterService.getTwitterHandle(form).subscribe(data=> {
       this.usersList = data;
     });
     console.log('submitted');
@@ -22,11 +23,25 @@ export class SearchTwitterComponent{
 
 
   public open(event, item){
-    let params = new HttpParams();
-    params = params.append('screen_name', item)
-    this.http.get('http://localhost:3000/api/tweets', {params: params})
-    .subscribe();
+    console.log("getting tweets now");
+    this.twitterService.getTweets(item).subscribe(data => {
+      this.tweetsList = data;
+      // console.log(this.tweetsList[0].text);
+    // for(let tweet of this.tweetsList){
+    //   console.log(tweet.text);
+    // }
+      for(let tweet of this.tweetsList){
+        // console.log(JSON.stringify(tweet));
+        this.twitterService.sentimentAnalysis(tweet.text).subscribe(data => {
+          console.log(data);
+          this.sentimentsList.push(data);
+          // console.log(data);
+        })
+      }
+    });
+
   }
+
 
   // // Move all of this into Service ?
   // usersList: any = null;

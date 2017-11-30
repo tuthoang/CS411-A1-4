@@ -43,7 +43,7 @@ router.get('/search', (req, res) => {
 router.get('/tweets', (req,res) => {
   T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5})
   .then(function(result){
-    console.log(result.data[0].text)
+    // console.log(result.data[0].text)
     res.json(result.data)
   })
   .catch(function (err){
@@ -52,14 +52,16 @@ router.get('/tweets', (req,res) => {
 })
 
 router.get('/sentiment', (req,res) => {
-  // console.log(JSON.prase(req.body))
-  indico.emotion(JSON.stringify(req.query.sentimentBar))
+  console.log('sadlkajslkdsa');
+  console.log(req.query.tweet);
+  // let query = req.query.tweet.text;
+  indico.emotion(req.query.tweet)
   .then(function(result){
     console.log(result);
-    res.json(result)
+    res.json(result);
   })
   .catch(function(err){
-    console.log(err.message)
+    console.log(err.message);
   });
 })
 
