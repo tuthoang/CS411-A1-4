@@ -4,7 +4,7 @@ This project is done as part of CS411 semester project. This web application ask
 ---
 #### How to run
 
-To run, obtain the access keys from one of the contributors. Then, type in ```node server.js``` and go to ```localhost:8890```.
+To run, obtain the access keys from one of the contributors. Then, type in ```node server.js``` and go to ```localhost:3000```.
 
 ---
 #### Contributors 
