@@ -34,8 +34,28 @@ export class SearchTwitterComponent{
         // console.log(JSON.stringify(tweet));
         this.twitterService.sentimentAnalysis(tweet.text).subscribe(data => {
           console.log(data);
-          this.sentimentsList.push(data);
-          // console.log(data);
+          var maxVal = 0;
+          var bestGuess = "temp";
+          var temp = JSON.parse(JSON.stringify(data));
+          var keys = Object.keys(temp);
+
+          for (var i = 0; i < keys.length; i++){
+            var key = keys[i];
+            console.log(key, temp[key]);
+            if(maxVal < temp[key]){
+                maxVal = temp[key];
+                bestGuess = key;
+            }
+          }
+
+          // for (var key in temp){
+          //   if(maxVal < temp[key]){
+          //     maxVal = temp[key];
+          //     bestGuess.replace(bestGuess, key);
+          //   }
+          // }
+          console.log(bestGuess)
+          this.sentimentsList.push(bestGuess);
         })
       }
     });
