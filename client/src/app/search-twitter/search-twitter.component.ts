@@ -30,6 +30,7 @@ export class SearchTwitterComponent{
     // for(let tweet of this.tweetsList){
     //   console.log(tweet.text);
     // }
+      this.sentimentsList = [];
       for(let tweet of this.tweetsList){
         // console.log(JSON.stringify(tweet));
         this.twitterService.sentimentAnalysis(tweet.text).subscribe(data => {
@@ -47,14 +48,6 @@ export class SearchTwitterComponent{
                 bestGuess = key;
             }
           }
-
-          // for (var key in temp){
-          //   if(maxVal < temp[key]){
-          //     maxVal = temp[key];
-          //     bestGuess.replace(bestGuess, key);
-          //   }
-          // }
-          console.log(bestGuess)
           this.sentimentsList.push(bestGuess);
         })
       }
