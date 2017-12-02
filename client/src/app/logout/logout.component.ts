@@ -16,7 +16,7 @@ export class LogoutComponent  {
   onSubmit(form :NgForm){
     console.log("attemping to log out");
     
-    this.http.post('/auth/logout',form);
+    this.http.get('/auth/secret').subscribe();
   }
 
 }
