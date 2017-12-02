@@ -13,6 +13,6 @@ export class TwitterLoginComponent {
   constructor(public http : HttpClient){}
 
   myEvent() {
-    this.http.get('/api/me').subscribe();
+    this.http.get('/auth/me').subscribe();
   }
 }

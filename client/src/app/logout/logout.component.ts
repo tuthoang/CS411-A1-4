@@ -13,10 +13,10 @@ export class LogoutComponent  {
 
   constructor(private auth: AuthService, public http:HttpClient) { }
 
-  onSubmit(form :NgForm){
-    console.log("attemping to log out");
-    
+  logout(){
+    this.auth.logout();
+  }
+  myinfo(){
     this.http.get('/auth/secret').subscribe();
   }
-
 }

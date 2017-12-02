@@ -24,6 +24,10 @@ export class AuthService {
     console.log(localStorage.getItem('jwt'));
     return localStorage.getItem('jwt');
   }
+  logout() {
+    localStorage.removeItem('jwt');
+    // localStorage.removeItem("expires_at");
+  }
   public isAuthenticated(): boolean {
     // get the token
     const token = this.getToken();
