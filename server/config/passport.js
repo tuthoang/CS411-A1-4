@@ -26,8 +26,16 @@ module.exports = function(passport) {
   //     done(null, profile);
   //   }
   // ));
+
+  var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.cookies) token = req.cookies['jwt'];
+    return token;
+  };
+
   var opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+  // opts.jwtFromRequest = cookieExtractor;
   opts.secretOrKey = config.JWTsecret.secret;
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     console.log(jwt_payload);

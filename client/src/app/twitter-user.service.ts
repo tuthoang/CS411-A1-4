@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 // import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { SearchTwitterComponent } from './search-twitter/search-twitter.component'
 @Injectable()
 export class TwitterUserService {
   // usersList: any = null;
@@ -23,7 +22,7 @@ export class TwitterUserService {
     }
     let params = new HttpParams();
     params = params.append('searchBar', form.value.searchBar);
-    return this.http.get<twitterUsers>('http://localhost:3000/api/search', {
+    return this.http.get<twitterUsers>('/api/search', {
       params: params
     });
     // .subscribe(
@@ -44,7 +43,7 @@ export class TwitterUserService {
     let params = new HttpParams();
     params = params.append('screen_name', item);
     // params = params.append('tweet_mode','extended');
-    return this.http.get<tweetsList>('http://localhost:3000/api/tweets', {
+    return this.http.get<tweetsList>('/api/tweets', {
       params: params
     });
   }
@@ -56,7 +55,7 @@ export class TwitterUserService {
     let params = new HttpParams();
     params = params.append('tweet', tweet);
     // params = params.append('tweet_mode','extended');
-    return this.http.get<sentiments>('http://localhost:3000/api/sentiment', {
+    return this.http.get<sentiments>('/api/sentiment', {
       params: params
     });
   }

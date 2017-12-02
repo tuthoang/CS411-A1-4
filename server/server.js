@@ -4,12 +4,15 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser')
+
 const cors = require('cors');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const jwt = require('jsonwebtoken');
 // Get our API routes
 const api = require('./routes/api');
+const auth = require('./routes/auth')
 const passport = require('passport');
 // const passportRoute = require('./routes/api')(passport);
 const app = express();
@@ -43,6 +46,7 @@ app.all('/*', function(req, res, next) {
 //   resave: false,
 //   saveUninitialized: true
 // }))
+app.use(cookieParser());
 app.use(passport.initialize());
 // app.use(passport.session());
 // app.use(flash());
@@ -50,6 +54,7 @@ app.use(passport.initialize());
 
 // Set our api routes
 app.use('/api',api);
+app.use('/auth',auth);
 // app.use(passportRoute);
 
 
