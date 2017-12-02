@@ -86,6 +86,7 @@ router.get("/secret", passport.authenticate('jwt', { session: false }),
 router.get("/secretDebug",
   function(req, res, next){
     console.log(req.get('Authorization'));
+    console.log('sadiosad');
     next();
   }, function(req, res){
     res.json("debugging");
