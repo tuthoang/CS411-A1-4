@@ -8,7 +8,7 @@
 //     console.log("Collection created!");
 //     db.close();
 //   });
-});
+// });
 const mongoose = require('mongoose');
 
 var db = mongoose.connection;

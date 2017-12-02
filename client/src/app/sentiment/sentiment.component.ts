@@ -17,7 +17,7 @@ export class SentimentComponent {
     let params= new HttpParams();
     params = params.append('sentimentBar', form.value.sentimentBar);
     //API call with the form data
-    this.http.get('http://localhost:3000/api/sentiment', {
+    this.http.get('/api/sentiment', {
       params: params
     }).subscribe();
   }
