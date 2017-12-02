@@ -35,7 +35,7 @@ export class RegistrationFormComponent {
     this.password = form.password;
     this.confirmPassword = form.confirmPassword;
     if(this.password == this.confirmPassword) this.matchPW = true;
-    this.http.post('/api/create', form).subscribe();
+    this.http.post('/auth/create', form).subscribe();
   }
   // constructor(private fb: FormBuilder) { // <--- inject FormBuilder
   //   this.createForm();

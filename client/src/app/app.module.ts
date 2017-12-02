@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BrowserXhr } from '@angular/http';
 import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
@@ -13,7 +13,10 @@ import { SentimentComponent } from './sentiment/sentiment.component';
 import { TwitterLoginComponent } from './twitter-login/twitter-login.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { TwitterUserService } from './twitter-user.service';
-import { LoginFormComponent } from './login-form/login-form.component'
+import { LoginFormComponent } from './login-form/login-form.component';
+import { LogoutComponent } from './logout/logout.component'
+import { AuthInterceptor } from './auth-interceptor';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { LoginFormComponent } from './login-form/login-form.component'
     SentimentComponent,
     TwitterLoginComponent,
     RegistrationFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +37,16 @@ import { LoginFormComponent } from './login-form/login-form.component'
     RouterModule.forRoot([
       {path:'search-twitter',component: SearchTwitterComponent},
       {path:'sentiment', component: SentimentComponent},
-      {path:'twitter-login', component: TwitterLoginComponent}
+      {path:'twitter-login', component: TwitterLoginComponent},
+      // {path:'login-form', component: LoginFormComponent},
+      {path:'registration-form', component: RegistrationFormComponent}
       ])
   ],
   providers: [    
     {provide: BrowserXhr, useClass:CustExtBrowserXhr},
-    TwitterUserService
+    TwitterUserService,
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
