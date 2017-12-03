@@ -7,17 +7,16 @@
           <input formControlName="email" (focus)="emailFocus = true" (blur)="emailFocus = false" name="email">
         </label>
 
-        <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
-
         <label>password
-          <input type="password" formControlName="password" name="password">
+          <input type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="password" name="password">
         </label>
         <label>confirm password
-          <input type="password" formControlName="confirmPassword" name="confirmPassword">
+          <input type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="confirmPassword" name="confirmPassword">
         </label>
-
-        <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty">{{passwordError}}</div>
-        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty">Passwords not match</div>
+        
+        <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
+        <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty && pwFocus == false">{{passwordError}}</div>
+        <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty && pwFocus == false">Passwords not match</div>
         <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
       </div>
     </div>

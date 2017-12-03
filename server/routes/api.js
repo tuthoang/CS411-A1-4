@@ -24,10 +24,10 @@ router.get('/', (req, res) => {
 router.get('/me', (req, res) => {
   var token = req.headers['x-access-token'];
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-  
+
   jwt.verify(token, config.secret, function(err, decoded) {
     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-    
+
     res.status(200).send(decoded);
   });
 });
@@ -45,7 +45,7 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/tweets', (req,res) => {
-  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5})
+  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5, tweet_mode: 'extended'})
   .then(function(result){
     // console.log(result.data[0].text)
     res.json(result.data)
@@ -56,7 +56,6 @@ router.get('/tweets', (req,res) => {
 })
 
 router.get('/sentiment', (req,res) => {
-  console.log('sadlkajslkdsa');
   console.log(req.query.tweet);
   // let query = req.query.tweet.text;
   indico.emotion(req.query.tweet)

@@ -34,7 +34,6 @@ export class SearchTwitterComponent{
       for(let tweet of this.tweetsList){
         // console.log(JSON.stringify(tweet));
         this.twitterService.sentimentAnalysis(tweet.text).subscribe(data => {
-          console.log(data);
           var maxVal = 0;
           var bestGuess = "temp";
           var temp = JSON.parse(JSON.stringify(data));
@@ -42,7 +41,6 @@ export class SearchTwitterComponent{
 
           for (var i = 0; i < keys.length; i++){
             var key = keys[i];
-            console.log(key, temp[key]);
             if(maxVal < temp[key]){
                 maxVal = temp[key];
                 bestGuess = key;

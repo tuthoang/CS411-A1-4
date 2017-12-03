@@ -19,6 +19,7 @@ export class RegistrationFormComponent {
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
+  pwFocus: boolean = false;
   constructor(private fb: FormBuilder, public http: HttpClient) {
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
