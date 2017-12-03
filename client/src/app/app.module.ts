@@ -37,11 +37,13 @@ import { GreetingComponent } from './greeting/greeting.component';
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path:'search-twitter',component: SearchTwitterComponent},
-      {path:'sentiment', component: SentimentComponent},
-      {path:'twitter-login', component: TwitterLoginComponent},
-      // {path:'login-form', component: LoginFormComponent},
-      {path:'registration-form', component: RegistrationFormComponent}
+      {path:'', component: GreetingComponent},
+      {path:'search-twitter', component: SearchTwitterComponent,pathMatch: 'full'}
+      // {path:'search-twitter',component: SearchTwitterComponent},
+      // {path:'sentiment', component: SentimentComponent},
+      // {path:'twitter-login', component: TwitterLoginComponent},
+      // // {path:'login-form', component: LoginFormComponent},
+      // {path:'registration-form', component: RegistrationFormComponent}
       ])
   ],
   providers: [    
