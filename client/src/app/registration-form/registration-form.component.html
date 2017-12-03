@@ -20,14 +20,12 @@
 
               <div class="col-sm-4 form-group">
                 <label>confirm password</label>
-                <input type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="confirmPassword" name="confirmPassword">
-
-                <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
-                <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty">{{passwordError}}</div>
-                <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty">Passwords not match</div>
+                <input class="form-control" type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="confirmPassword" name="confirmPassword">
               </div>
             </div>
-
+            <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
+            <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty">{{passwordError}}</div>
+            <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty">Passwords not match</div>
             <button type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">Create Account!</button>
           </div>
         </form>
