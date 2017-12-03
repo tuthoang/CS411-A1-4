@@ -34,10 +34,8 @@ export class SearchTwitterComponent{
       var bestGuess;
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
-        console.log(tweet.full_text);
         if(tweet.hasOwnProperty('retweeted_status')){
           this.twitterService.sentimentAnalysis(tweet.retweeted_status.full_text).subscribe(data => {
-            console.log(data);
             var maxVal = 0;
             var bestGuess = "temp";
             var temp = JSON.parse(JSON.stringify(data));
@@ -55,7 +53,6 @@ export class SearchTwitterComponent{
         }
         else{
           this.twitterService.sentimentAnalysis(tweet.full_text).subscribe(data => {
-            console.log(data);
             var maxVal = 0;
             var bestGuess = "temp";
             var temp = JSON.parse(JSON.stringify(data));
@@ -63,7 +60,6 @@ export class SearchTwitterComponent{
 
             for (var i = 0; i < keys.length; i++){
               var key = keys[i];
-              console.log(key, temp[key]);
               if(maxVal < temp[key]){
                   maxVal = temp[key];
                   bestGuess = key;

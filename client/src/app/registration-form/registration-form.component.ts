@@ -29,17 +29,13 @@ export class RegistrationFormComponent {
       });
     // this.test();
   }
-  public test(){
-    console.log("pwmatch", this.rForm);
-  }
-
 
   onSubmit(form) {
     this.email = form.email;
     this.password = form.password;
     this.confirmPassword = form.confirmPassword;
     if(this.password == this.confirmPassword) this.matchPW = true;
-    
+
     this.http.post('/auth/create', form).subscribe();
   }
   // constructor(private fb: FormBuilder) { // <--- inject FormBuilder
