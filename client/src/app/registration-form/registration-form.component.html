@@ -11,18 +11,18 @@
               <div class="col-sm-4 form-group">
                 <label>Email</label>
                 <input class="form-control" placeholder="Insert Email..." formControlName="email" (focus)="emailFocus = true" (blur)="emailFocus = false" name="email">
-                <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
               </div>
 
               <div class="col-sm-4 form-group">
                 <label>password</label>
-                <input class="form-control" type="password" formControlName="password" name="password">
+                <input class="form-control" type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="password" name="password">
               </div>
 
               <div class="col-sm-4 form-group">
                 <label>confirm password</label>
-                <input class="form-control" type="password" formControlName="confirmPassword" name="confirmPassword">
+                <input type="password" (focus)="pwFocus = true" (blur)="pwFocus = false" formControlName="confirmPassword" name="confirmPassword">
 
+                <div class="alert alert-danger" *ngIf="!rForm.get('email').valid && rForm.get('email').dirty && emailFocus == false">{{ emailError }}</div>
                 <div class="alert alert-danger" *ngIf="!rForm.get('password').valid && rForm.get('password').dirty">{{passwordError}}</div>
                 <div class="alert alert-danger" *ngIf="!rForm.controls.confirmPassword.errors?.MatchPassword && rForm.controls['confirmPassword'].dirty">Passwords not match</div>
               </div>

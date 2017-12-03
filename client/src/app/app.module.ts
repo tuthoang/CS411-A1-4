@@ -17,6 +17,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { LogoutComponent } from './logout/logout.component'
 import { AuthInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
+import { GreetingComponent } from './greeting/greeting.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthService } from './auth.service';
     TwitterLoginComponent,
     RegistrationFormComponent,
     LoginFormComponent,
-    LogoutComponent
+    LogoutComponent,
+    GreetingComponent
   ],
   imports: [
     BrowserModule,

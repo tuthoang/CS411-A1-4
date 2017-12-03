@@ -71,7 +71,13 @@
 <!--<div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
-      <li> {{tweet.text}}</li>
+      <li>
+        <div *ngIf = "tweet.hasOwnProperty('retweeted_status');else own_tweet">
+          RT &nbsp;{{tweet.retweeted_status.user.screen_name}}:  {{tweet.retweeted_status.full_text}}
+        </div>
+        <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+      </li>
+      
     </ul>
   </div>
 </div>-->
