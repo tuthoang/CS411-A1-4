@@ -2,30 +2,80 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
 var User = require('../models/Users')
 
 const config = require('./config')
 
 
-// opts.issuer = 'accounts.examplesoft.com';
-// opts.audience = 'yoursite.net';
-
 module.exports = function(passport) {
 
-  // passport.use(new TwitterStrategy({
-  //     consumerKey: config.oauth.consumer_key,
-  //     consumerSecret: config.oauth.consumer_secret,
-  //     callbackURL: "http://localhost:3000/auth/twitter/callback"
-  //   },
-  //   function(token, tokenSecret, profile, done) {
-  //     console.log(profile)
-  //     // User.findOrCreate(..., function(err, user) {
-  //     //   if (err) { return done(err); }
-  //     //   done(null, user);
-  //     // });
-  //     done(null, profile);
-  //   }
-  // ));
+  passport.use(new TwitterStrategy({
+      consumerKey: config.oauth.consumer_key,
+      consumerSecret: config.oauth.consumer_secret,
+      callbackURL: "http://localhost:3000/auth/twitter/callback",
+      includeEmail: true,
+      passReqToCallback: true
+
+    },
+    function(req, token, tokenSecret, profile, done){
+      // console.log(profile);
+      // return done(null,profile);
+
+      User.findOne({'twitter.id': profile.id}), function(err,user){
+        if(err) return done(err);
+        // let payload = {id: profile.id, email: profile.emails[0].value};
+        // let token = jwt.sign(payload, config.JWTsecret.secret, {
+        //   expiresIn: 24*24*60
+        // });
+        // res.cookie('jwt',token);
+
+        if(!user){
+          console.log('creating new user');
+          user = new User({
+            email: profile.emails[0].value,
+            twitter: profile._json
+          });
+          user.save(function(err) {
+            if(err) console.log(err);
+            return done(err,user);
+          });
+        } else{
+          console.log('found user');
+          return done(null,user);
+        }
+      }
+    } 
+    // function(token, tokenSecret, profile, done) {
+    //   console.log(profile)
+    //   console.log(profile.email);
+      // return done(null, profile);
+
+      // User.findOne({email: profile.emails[0].value}), function(err, user){
+      //   console.log('sadlkjas');
+      //   if(err) {
+      //     console.log('error');
+      //     return done(err);
+      //   }
+      //   if(!user){
+      //     console.log("creating user from twitter");
+      //     user = new User({
+      //       email : profile.emails[0].value,
+      //       password: null
+      //     })
+      //     // save the user
+      //     user.save(function(err) {
+      //       console.log("twitter user registered");
+      //       if (err) throw err;
+      //       return done(null,user);
+      //     })
+      //   }else{
+      //     console.log('user already in db');
+      //     return done(null,user);
+      //   }
+      // }
+    // }
+  ));
 
   var cookieExtractor = function(req) {
     var token = null;
