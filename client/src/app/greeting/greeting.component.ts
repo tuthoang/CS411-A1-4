@@ -29,8 +29,23 @@ export class GreetingComponent  {
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       validator: PasswordValidation.MatchPassword // custom validation method
-      });
+      },
+      {validator: this.checkIfMatchingPasswords('password', 'confirmPassword')});
   }
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      let passwordInput = group.controls[passwordKey],
+          passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({notEquivalent: true})
+      }
+      else {
+          return passwordConfirmationInput.setErrors(null);
+      }
+    }
+  }
+
   Register(form) {
     this.http.post('/auth/create', form).subscribe(
         data=>{
