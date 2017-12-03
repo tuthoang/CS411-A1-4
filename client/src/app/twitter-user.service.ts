@@ -18,7 +18,7 @@ export class TwitterUserService {
 
   getTwitterHandle(form: NgForm){
     interface twitterUsers {
-      data: Array<any>
+      data: any
     }
     let params = new HttpParams();
     params = params.append('searchBar', form.value.searchBar);

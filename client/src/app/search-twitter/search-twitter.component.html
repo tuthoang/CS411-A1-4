@@ -8,23 +8,16 @@
   </div>
 </form>
 <!-- Write a Service to transfer this usersList -->
-<div *ngIf="usersList != null">
-  <div *ngFor="let user of usersList">
-    <!-- <button (click)="open($event, user.screen_name)">{{user.screen_name}}</button> -->
-    <button (click)='open($event, user.screen_name)'>{{user.screen_name}}</button>
-
-  </div>
-  <!-- {{usersList[0].id}}
-  {{usersList[0].screen_name}}
-  {{usersList[1].id}}
-  {{usersList[1].screen_name}} -->
+<div *ngIf="twitterHandle != null">
+    <button (click)='open($event, twitterHandle.screen_name)'>{{twitterHandle.screen_name}}</button>
 </div>
+
 <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
       <li>
         <div *ngIf = "tweet.hasOwnProperty('retweeted_status');else own_tweet">
-          RT &nbsp;{{tweet.retweeted_status.user.screen_name}}:  {{tweet.retweeted_status.full_text}}
+          RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
         </div>
         <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
       </li>

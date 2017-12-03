@@ -33,7 +33,7 @@ router.get('/me', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-  T.get('users/search', { q: JSON.stringify(req.query.searchBar), count: 5 })
+  T.get('users/lookup', { screen_name: req.query.searchBar })
   .then(function(result) {
       // console.log(result);
       res.json(result.data);
