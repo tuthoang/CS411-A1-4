@@ -42,7 +42,6 @@ export class SearchTwitterComponent{
 
           for (var i = 0; i < keys.length; i++){
             var key = keys[i];
-            console.log(key, temp[key]);
             if(maxVal < temp[key]){
                 maxVal = temp[key];
                 bestGuess = key;
