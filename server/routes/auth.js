@@ -9,19 +9,24 @@ require('../config/passport')(passport); // pass passport for configuration
 
 
 router.post('/create', (req,res) => {
+  User.findOne({email: req.body.email}, function(err,user){
+    if(err) return res.json({message: 'Error trying to create account.', valid: false});
+    if(user) return res.json({message: 'Email exists already.', valid: false});
+    else{
+      let newUser = User({
+        email: req.body.email,
+        password: req.body.password
+      });
 
-  // create a new user
-  let newUser = User({
-    email: req.body.email,
-    password: req.body.password
-  });
+      // save the user
+      newUser.save(function(err) {
+        if (err) throw err;
 
-  // save the user
-  newUser.save(function(err) {
-    if (err) throw err;
-
-    console.log('User created!');
-  });
+        return res.json({message: 'User created!', valid: true});
+      });
+    }
+  })
+  
 })
 
 //TWITTER LOG

@@ -9,14 +9,15 @@ import { TwitterUserService } from '../twitter-user.service';
 })
 export class SearchTwitterComponent{
 
-  usersList: any = null;
+  twitterHandle: any = null;
   tweetsList: any = null;
   sentimentsList: Array<any> = [];
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
   onSubmit(form : NgForm) {
     this.twitterService.getTwitterHandle(form).subscribe(data=> {
-      this.usersList = data;
+      console.log(data);
+      this.twitterHandle = data[0];
     });
     console.log('submitted');
   }

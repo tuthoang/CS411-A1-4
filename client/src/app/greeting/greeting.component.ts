@@ -22,22 +22,37 @@ export class GreetingComponent  {
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
-
+  message: Object;
   constructor(private auth: AuthService,private fb: FormBuilder, public http: HttpClient){
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       validator: PasswordValidation.MatchPassword // custom validation method
-      });
+      },
+      {validator: this.checkIfMatchingPasswords('password', 'confirmPassword')});
   }
-  Register(form) {
-    this.email = form.email;
-    this.password = form.password;
-    this.confirmPassword = form.confirmPassword;
-    if(this.password == this.confirmPassword) this.matchPW = true;
 
-    this.http.post('/auth/create', form).subscribe();
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      let passwordInput = group.controls[passwordKey],
+          passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({notEquivalent: true})
+      }
+      else {
+          return passwordConfirmationInput.setErrors(null);
+      }
+    }
+  }
+
+  Register(form) {
+    this.http.post('/auth/create', form).subscribe(
+        data=>{
+          console.log(data);
+          this.message = data;
+        }
+      );
   }
   Login(form:NgForm){
     if(form.value. email && form.value.password)
