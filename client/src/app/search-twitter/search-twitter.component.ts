@@ -41,7 +41,6 @@ export class SearchTwitterComponent{
             var bestGuess = "temp";
             var temp = JSON.parse(JSON.stringify(data));
             var keys = Object.keys(temp);
-
             for (var i = 0; i < keys.length; i++){
               var key = keys[i];
               console.log(key, temp[key]);
