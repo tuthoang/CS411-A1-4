@@ -4,39 +4,82 @@
   </div>
 </div>
 
-<form #twitterForm = "ngForm" (ngSubmit) = "onSubmit(twitterForm)">
-  <div class ="form-group">
-    <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
-    <input ngModel type="text" class="form-control" id="searchBar" name="searchBar"
-      placeholder="Insert Twitter User" #twitterUser = "ngModel">
-    <input type="submit" value="Submit">
+<div class="container">
+  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
+    <div class="row">
+      <div class="form-group col-xs-5 col-lg-6">
+        <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
+        <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
+      </div>
+    </div>
 
-  </div>
-</form>
+    <div class="row">
+      <div class="col-xs-5 col-lg-6">
+        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
 <!-- Write a Service to transfer this usersList -->
-<div *ngIf="usersList != null">
-  <div *ngFor="let user of usersList">
-    <!-- <button (click)="open($event, user.screen_name)">{{user.screen_name}}</button> -->
-    <button (click)='open($event, user.screen_name)'>{{user.screen_name}}</button>
+<div class="container">
 
+  <div class="panel-group" id="accordion">
+
+    <div *ngIf="usersList != null">
+      <div *ngFor="let user of usersList">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+
+      <!-- <button (click)="open($event, user.screen_name)">{{user.screen_name}}</button> -->
+      <a data-toggle="collapse" data-parent="#accordion" href="#{{user.screen_name}}"><button (click)='open($event, user.screen_name)' class="btn btn-info btn-lg">{{user.screen_name}}</button></a>
+    </h4>
+            <div id="{{user.screen_name}}" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <div *ngIf="tweetsList != null">
+                  <div *ngFor="let tweet of tweetsList">
+                    <ul>
+                      <li>{{tweet.text}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div *ngIf="sentimentsList != null">
+                  <div *ngFor="let sentiment of sentimentsList">
+                    <ul>
+                      <li> {{sentiment}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- {{usersList[0].id}}
+</div>
+
+<!-- {{usersList[0].id}}
   {{usersList[0].screen_name}}
   {{usersList[1].id}}
   {{usersList[1].screen_name}} -->
-</div>
-<div *ngIf="tweetsList != null">
+<!--<div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
       <li> {{tweet.text}}</li>
     </ul>
   </div>
-</div>
+</div>-->
 
-<div *ngIf="sentimentsList != null">
+<!--<div *ngIf="sentimentsList != null">
   <div *ngFor="let sentiment of sentimentsList">
     <ul>
       <li> {{sentiment}}</li>
     </ul>
   </div>
-</div>
+</div>-->
