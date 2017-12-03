@@ -1,16 +1,25 @@
-<div>
-  <form #loginForm = "ngForm" (ngSubmit) = "onSubmit(loginForm)">
-    <div class="form-container">
-      <div class="row columns">
-        <h1>My Login Form</h1>
-        <label>email
-          <input ngModel name="email">
-        </label>
-        <label>password
-          <input ngModel type="password" name="password">
-        </label>
-        <input type="submit" class="button expanded" value="Submit">
-      </div>
+<div class="container">
+  <div class="col-lg-12 well">
+    <div class="row">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+        <div class="col-sm-12">
+
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <label>email</label>
+              <input class="form-control" ngModel name="email" placeholder="Insert Email...">
+            </div>
+
+            <div class="col-sm-4 form-group">
+              <label>password</label>
+              <input class="form-control" ngModel type="password" name="password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success" value="Submit">Login!</button>
+        </div>
+
+      </form>
     </div>
-  </form>
+  </div>
 </div>
