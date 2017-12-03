@@ -22,7 +22,7 @@ export class GreetingComponent  {
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
-
+  message: Object;
   constructor(private auth: AuthService,private fb: FormBuilder, public http: HttpClient){
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
@@ -32,12 +32,12 @@ export class GreetingComponent  {
       });
   }
   Register(form) {
-    this.email = form.email;
-    this.password = form.password;
-    this.confirmPassword = form.confirmPassword;
-    if(this.password == this.confirmPassword) this.matchPW = true;
-
-    this.http.post('/auth/create', form).subscribe();
+    this.http.post('/auth/create', form).subscribe(
+        data=>{
+          console.log(data);
+          this.message = data;
+        }
+      );
   }
   Login(form:NgForm){
     if(form.value. email && form.value.password)

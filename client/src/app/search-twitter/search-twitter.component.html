@@ -22,6 +22,12 @@
 </div>
 <br>
 <!-- Write a Service to transfer this usersList -->
+<div *ngIf="twitterHandle != null">
+    <button (click)='open($event, twitterHandle.screen_name)'>{{twitterHandle.screen_name}}</button>
+</div>
+
+<div *ngIf="tweetsList != null">
+
 <div class="container">
 
   <div class="panel-group" id="accordion">
@@ -33,7 +39,6 @@
           <div class="panel-heading">
             <h4 class="panel-title">
 
-      <!-- <button (click)="open($event, user.screen_name)">{{user.screen_name}}</button> -->
       <a data-toggle="collapse" data-parent="#accordion" href="#{{user.screen_name}}"><button (click)='open($event, user.screen_name)' class="btn btn-info btn-lg">{{user.screen_name}}</button></a>
     </h4>
             <div id="{{user.screen_name}}" class="panel-collapse collapse">
@@ -42,7 +47,12 @@
                 <div *ngIf="tweetsList != null">
                   <div *ngFor="let tweet of tweetsList">
                     <ul>
-                      <li>{{tweet.text}}</li>
+                      <li>
+                          <div *ngIf = "tweet.hasOwnProperty('retweeted_status');else own_tweet">
+                            RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
+                          </div>
+                          <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -64,23 +74,20 @@
   </div>
 </div>
 
-<!-- {{usersList[0].id}}
-  {{usersList[0].screen_name}}
-  {{usersList[1].id}}
-  {{usersList[1].screen_name}} -->
-<!--<div *ngIf="tweetsList != null">
+
+<!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
       <li>
         <div *ngIf = "tweet.hasOwnProperty('retweeted_status');else own_tweet">
-          RT &nbsp;{{tweet.retweeted_status.user.screen_name}}:  {{tweet.retweeted_status.full_text}}
+          RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
         </div>
         <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
       </li>
       
     </ul>
   </div>
-</div>-->
+</div> -->
 
 <!--<div *ngIf="sentimentsList != null">
   <div *ngFor="let sentiment of sentimentsList">
