@@ -32,8 +32,8 @@ export class SearchTwitterComponent{
     // }
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
-        // console.log(JSON.stringify(tweet));
-        this.twitterService.sentimentAnalysis(tweet.text).subscribe(data => {
+        console.log(tweet.full_text);
+        this.twitterService.sentimentAnalysis(tweet.full_text).subscribe(data => {
           console.log(data);
           var maxVal = 0;
           var bestGuess = "temp";

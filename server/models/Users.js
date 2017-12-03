@@ -9,29 +9,34 @@ const saltRound = 10;
 
 var userSchema = mongoose.Schema({
     email: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true }
+    password: { type: String },
+    twitter: { type: Object }
 });
 
-userSchema.pre('save', function(next) {
-  var user = this;
+// userSchema.pre('save', function(next) {
+//   var user = this;
+//   console.log('sdakjdas');
+//   if (!user.password) {
+//     console.log("twitter");
+//     next();
+//   }else{
+//     // only hash the password if it has been modified (or is new)
+//     if (!user.isModified('password')) return next();
+//     // generate a salt
+//     bcrypt.genSalt(saltRound, function(err, salt) {
+//         if (err) return next(err);
 
-  // only hash the password if it has been modified (or is new)
-  if (!user.isModified('password')) return next();
+//         // hash the password using our new salt
+//         bcrypt.hash(user.password, salt, function(err, hash) {
+//             if (err) return next(err);
 
-  // generate a salt
-  bcrypt.genSalt(saltRound, function(err, salt) {
-      if (err) return next(err);
-
-      // hash the password using our new salt
-      bcrypt.hash(user.password, salt, function(err, hash) {
-          if (err) return next(err);
-
-          // override the cleartext password with the hashed one
-          user.password = hash;
-          next();
-      });
-  });
-})
+//             // override the cleartext password with the hashed one
+//             user.password = hash;
+//             next();
+//         });
+//     });
+//   }
+// })
 
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
@@ -40,6 +45,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
         cb(null, isMatch);
     });
 };
+
 
 var User = mongoose.model('User', userSchema);
 
