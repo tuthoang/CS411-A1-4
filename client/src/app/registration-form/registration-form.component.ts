@@ -15,8 +15,8 @@ export class RegistrationFormComponent {
   password:string = '';
   confirmPassword:string = '';
   emailError:string = 'Enter a valid email';
-  passwordError:string = 'Enter a password of atleast 5 characters';
-  mismatch:string = 'Passwords dont match';
+  passwordError:string = 'Enter a password of at least 5 characters';
+  mismatch:string = 'Passwords do not match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
   pwFocus: boolean = false;
@@ -24,12 +24,15 @@ export class RegistrationFormComponent {
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
-      'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])]
-      },
-      {
+      'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       validator: PasswordValidation.MatchPassword // custom validation method
-    });
+      });
+    // this.test();
   }
+  public test(){
+    console.log("pwmatch", this.rForm);
+  }
+
 
   onSubmit(form) {
     this.email = form.email;
