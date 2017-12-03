@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { AuthService } from '../auth.service';
 import { PasswordValidation } from './password-validation.validator';
-import { HttpParams, HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'registration-form',
-  templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  selector: 'greeting',
+  templateUrl: './greeting.component.html',
+  styleUrls: ['./greeting.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
-export class RegistrationFormComponent {
+export class GreetingComponent  {
+
   rForm: FormGroup;
   post:any;                     // A property for our submitted form
   email:string = '';
@@ -19,7 +22,8 @@ export class RegistrationFormComponent {
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
-  constructor(private fb: FormBuilder, public http: HttpClient) {
+
+  constructor(private auth: AuthService,private fb: FormBuilder, public http: HttpClient){
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
@@ -29,29 +33,17 @@ export class RegistrationFormComponent {
       validator: PasswordValidation.MatchPassword // custom validation method
     });
   }
-
-  onSubmit(form) {
+  Register(form) {
     this.email = form.email;
     this.password = form.password;
     this.confirmPassword = form.confirmPassword;
     if(this.password == this.confirmPassword) this.matchPW = true;
     
     this.http.post('/auth/create', form).subscribe();
+  }  
+  Login(form:NgForm){
+    if(form.value. email && form.value.password)
+      this.auth.login(form.value);
   }
-  // constructor(private fb: FormBuilder) { // <--- inject FormBuilder
-  //   this.createForm();
-  // }
-
-  //  ngOnInit(){
-  //   this.form = new FormGroup({
-  //   email: new FormControl(""),
-  //   password: new FormControl("")
-  // });
-  // }
-
-  // onSubmit(){
-
-  // }
-
 
 }
