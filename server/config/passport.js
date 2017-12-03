@@ -24,11 +24,11 @@ module.exports = function(passport) {
 
       User.findOne({'twitter.id': profile.id}), function(err,user){
         if(err) return done(err);
-        let payload = {id: profile.id, email: profile.emails[0].value};
-        let token = jwt.sign(payload, config.JWTsecret.secret, {
-          expiresIn: 24*24*60
-        });
-        res.cookie('jwt',token);
+        // let payload = {id: profile.id, email: profile.emails[0].value};
+        // let token = jwt.sign(payload, config.JWTsecret.secret, {
+        //   expiresIn: 24*24*60
+        // });
+        // res.cookie('jwt',token);
 
         if(!user){
           console.log('creating new user');

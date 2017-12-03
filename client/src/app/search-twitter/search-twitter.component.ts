@@ -30,26 +30,49 @@ export class SearchTwitterComponent{
     // for(let tweet of this.tweetsList){
     //   console.log(tweet.text);
     // }
+      var bestGuess;
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
         console.log(tweet.full_text);
-        this.twitterService.sentimentAnalysis(tweet.full_text).subscribe(data => {
-          console.log(data);
-          var maxVal = 0;
-          var bestGuess = "temp";
-          var temp = JSON.parse(JSON.stringify(data));
-          var keys = Object.keys(temp);
+        if(tweet.hasOwnProperty('retweeted_status')){
+          this.twitterService.sentimentAnalysis(tweet.retweeted_status.full_text).subscribe(data => {
+            console.log(data);
+            var maxVal = 0;
+            var bestGuess = "temp";
+            var temp = JSON.parse(JSON.stringify(data));
+            var keys = Object.keys(temp);
 
-          for (var i = 0; i < keys.length; i++){
-            var key = keys[i];
-            console.log(key, temp[key]);
-            if(maxVal < temp[key]){
-                maxVal = temp[key];
-                bestGuess = key;
+            for (var i = 0; i < keys.length; i++){
+              var key = keys[i];
+              console.log(key, temp[key]);
+              if(maxVal < temp[key]){
+                  maxVal = temp[key];
+                  bestGuess = key;
+              }
             }
-          }
-          this.sentimentsList.push(bestGuess);
-        })
+            this.sentimentsList.push(bestGuess);
+          })
+        }
+        else{
+          this.twitterService.sentimentAnalysis(tweet.full_text).subscribe(data => {
+            console.log(data);
+            var maxVal = 0;
+            var bestGuess = "temp";
+            var temp = JSON.parse(JSON.stringify(data));
+            var keys = Object.keys(temp);
+
+            for (var i = 0; i < keys.length; i++){
+              var key = keys[i];
+              console.log(key, temp[key]);
+              if(maxVal < temp[key]){
+                  maxVal = temp[key];
+                  bestGuess = key;
+              }
+            }
+            this.sentimentsList.push(bestGuess);
+
+          })
+        }
       }
     });
 
