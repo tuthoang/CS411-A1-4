@@ -27,20 +27,18 @@ export class GreetingComponent  {
     this.rForm = fb.group({
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
-      'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])]
-      },
-      {
+      'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       validator: PasswordValidation.MatchPassword // custom validation method
-    });
+      });
   }
   Register(form) {
     this.email = form.email;
     this.password = form.password;
     this.confirmPassword = form.confirmPassword;
     if(this.password == this.confirmPassword) this.matchPW = true;
-    
+
     this.http.post('/auth/create', form).subscribe();
-  }  
+  }
   Login(form:NgForm){
     if(form.value. email && form.value.password)
       this.auth.login(form.value);
