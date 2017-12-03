@@ -22,26 +22,25 @@
 </div>
 <br>
 <!-- Write a Service to transfer this usersList -->
-<div *ngIf="twitterHandle != null">
+<!-- <div *ngIf="twitterHandle != null">
     <button (click)='open($event, twitterHandle.screen_name)'>{{twitterHandle.screen_name}}</button>
-</div>
+</div> -->
 
-<div *ngIf="tweetsList != null">
-
+<!-- <div *ngIf="tweetsList != null">
+ -->
 <div class="container">
 
   <div class="panel-group" id="accordion">
 
-    <div *ngIf="usersList != null">
-      <div *ngFor="let user of usersList">
+    <div *ngIf="twitterHandle != null">
 
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
 
-      <a data-toggle="collapse" data-parent="#accordion" href="#{{user.screen_name}}"><button (click)='open($event, user.screen_name)' class="btn btn-info btn-lg">{{user.screen_name}}</button></a>
+      <a data-toggle="collapse" data-parent="#accordion" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
     </h4>
-            <div id="{{user.screen_name}}" class="panel-collapse collapse">
+            <div id="{{twitterHandle.screen_name}}" class="panel-collapse collapse">
               <div class="panel-body">
 
                 <div *ngIf="tweetsList != null">
@@ -71,7 +70,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 
