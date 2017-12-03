@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 require('../config/passport')(passport); // pass passport for configuration
 
 
-
 router.post('/create', (req,res) => {
 
   // create a new user
@@ -24,6 +23,19 @@ router.post('/create', (req,res) => {
     console.log('User created!');
   });
 })
+
+//TWITTER LOG
+// Redirect the user to Twitter for authentication.  When complete, Twitter
+// will redirect the user back to the application at
+//   /auth/twitter/callback
+router.get('/twitter', passport.authenticate('twitter', {session: false}));
+
+// Twitter will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+router.get('/twitter/callback',
+  passport.authenticate('twitter', { successRedirect: '/', failureRedirect:'/api/error'}));
 
 // router.post('/login', passport.authenticate('local', {successRedirect:'/api/me', failureRedirect: '/api', failureFlash: true, session:true}),
 //   function(req,res) {
@@ -49,16 +61,15 @@ router.post("/login", function(req, res) {
       if(err) throw err;
       if(isMatch){
         var payload = {id: user._id, email: user.email};
-        var token = jwt.sign(payload, config.JWTsecret.secret);
+        var token = jwt.sign(payload, config.JWTsecret.secret, {
+          expiresIn: 24*24*60
+        });
         console.log('logging');
-        // sessionStorage.setItem('jwt', token)
-        // res.setHeader('Authorization', 'Bearer ' +token); //doesnt work
         res.cookie('jwt',token);
-        // res.redirect(302, 'http://localhost:3000');
-
         res.json({
           success: true, 
-          message: "Receiving Token", 
+          message: "Receiving Token",
+          user: user.email,
           token: 'Bearer ' + token
         });
       } else{
@@ -86,10 +97,13 @@ router.get("/secret", passport.authenticate('jwt', { session: false }),
 router.get("/secretDebug",
   function(req, res, next){
     console.log(req.get('Authorization'));
-    console.log('sadiosad');
     next();
   }, function(req, res){
     res.json("debugging");
 });
+
+router.get('/me', function(res,req){
+  res.json(req.user);
+})
 
 module.exports = router;
