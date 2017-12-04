@@ -68,7 +68,7 @@ export class GreetingComponent  {
             if(data.success==true){
               console.log(data.success)
               localStorage.setItem('jwt', data.token);
-              this.router.navigate(['search-twitter']);
+              this.router.navigate(['home']);
             }
             else{
               this.loginError = "Incorrect Login Info";

@@ -15,9 +15,7 @@ var userSchema = mongoose.Schema({
 
 userSchema.pre('save', function(next) {
   var user = this;
-  console.log('sdakjdas');
   if (!user.password) {
-    console.log("twitter");
     next();
   }else{
     // only hash the password if it has been modified (or is new)
