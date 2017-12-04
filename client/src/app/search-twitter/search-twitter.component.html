@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="jumbotron">
+    <div class="page-header">
+      <h1 class="display-3">Hello Again!</h1>
+    </div>
+    <p class="lead">Get started by searching for a twitter user below!</p>
+  </div>
+</div>
+
+<div class="container">
   <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
     <div class="row">
       <div class="form-group col-xs-5 col-lg-6">
@@ -24,46 +33,34 @@
  -->
 <div class="container">
 
-  <div class="panel-group" id="accordion">
+  <div *ngIf="twitterHandle != null">
 
-    <div *ngIf="twitterHandle != null">
+    <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
+    <div id="{{twitterHandle.screen_name}}" class="collapse jumbotron">
+      <div class="text-center">
+        <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
+      </div>
+      <br>
 
-      <a data-toggle="collapse" data-parent="#accordion" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
-    </h4>
-            <div id="{{twitterHandle.screen_name}}" class="panel-collapse collapse">
-              <div class="panel-body">
-
-                <div *ngIf="tweetsList != null">
-                  <div *ngFor="let tweet of tweetsList">
-                    <ul>
-                      <li>
-                          <div *ngIf = "tweet.hasOwnProperty('retweeted_status');else own_tweet">
-                            RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
-                          </div>
-                          <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div *ngIf="sentimentsList != null">
-                  <div *ngFor="let sentiment of sentimentsList">
-                    <ul>
-                      <li> {{sentiment}}</li>
-                    </ul>
-                  </div>
-                </div>
-
+      <div *ngIf="tweetsList != null">
+        <div *ngFor="let tweet of tweetsList; let i = index">
+          <ul class="list-group">
+            <a data-toggle="collapse" href="#{{tweet.id}}"><li class="list-group-item">
+              <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
+                RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
               </div>
+              <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+            </li></a>
+            <div id="{{tweet.id}}" class="collapse">
+              <h1>{{sentimentsList[i]}}</h1>
             </div>
-          </div>
+          </ul>
         </div>
       </div>
+
     </div>
+  </div>
 </div>
 <div *ngIf = "data">
 <p-chart type="pie" [data]="data"></p-chart>
@@ -77,7 +74,7 @@
         </div>
         <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
       </li>
-      
+
     </ul>
   </div>
 </div> -->

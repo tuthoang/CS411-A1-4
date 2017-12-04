@@ -8,5 +8,5 @@ To run, obtain the access keys from one of the contributors. Then, type in ```no
 
 ---
 #### Contributors 
-Xavier Bohorquex, Timmy Hoang, Seunghun Oh, and Richard Wan
+Xavier Bohorquex, Timmy Hoang, and Seunghun Oh
  
