@@ -122,7 +122,6 @@ export class SearchTwitterComponent{
                   "#FFCE45",
                   '#FF1919',
                   '#329932'
-
               ]
           }]
       };
@@ -130,11 +129,11 @@ export class SearchTwitterComponent{
 
   HighestEmotion(){
     var max = this.array.indexOf(Math.max(...this.array));
-    if (max == 0) this.emotion = 'You are a very very angry person.';
+    if (max == 0) this.emotion = 'This person is a very very angry person.';
     else if (max == 1) this.emotion = 'Happy happy happy.';
-    else if (max == 2) this.emotion = 'You`re scared';
-    else if (max == 3) this.emotion = 'Youre sad';
-    else if (max == 4) this.emotion = 'Youre surprised';
+    else if (max == 2) this.emotion = 'Why is this person so scared?';
+    else if (max == 3) this.emotion = 'Too sad...';
+    else if (max == 4) this.emotion = 'Wow! Surprising tweets everywhere!';
   }
 
 
