@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron">
     <div class="page-header">
-      <h1 class="display-3">Hello Again!</h1>
+      <h1 class="display-3">Hello!</h1>
     </div>
     <p class="lead">Get started by searching for a twitter user below!</p>
   </div>
@@ -35,15 +35,17 @@
 
   <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
 
+  <!-- <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open(twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a> -->
   <div class="row collapse" id="{{twitterHandle.screen_name}}">
     <div class="col-sm-6">
-      <div class="col-sm-12 jumbotron">
-        <div class="row">
-          <div class="text-center">
-            <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
+      <div class="jumbotron">
+        <div class="text-center">
+          <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
+          <div clas="row">
+            <label>{{twitterHandle.screen_name}}</label>
           </div>
         </div>
-
+        <br>
 
         <div class="row">
           <div *ngIf="tweetsList != null">
