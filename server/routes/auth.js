@@ -57,9 +57,9 @@ router.post("/login", function(req, res) {
 
   User.findOne({email: email}, function(err, user) {
     if (err) {
-        return res.json({message: "error"})
+        return res.json({success: false, message: "error"})
     }
-    if(!user) res.json({message:"error: user not found"});
+    if(!user) res.json({success: false, message:"error: user not found"});
 
      else {
       user.comparePassword(password, function(err,isMatch){

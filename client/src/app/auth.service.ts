@@ -18,7 +18,7 @@ export class AuthService {
         // We're assuming the response will be an object
         // with the JWT on an id_token key
         data => {
-            if(data.token!=null){
+            if(data.success==true){
               localStorage.setItem('jwt', data.token);
               this.router.navigate(['search-twitter']);
             }

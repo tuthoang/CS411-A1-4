@@ -56,12 +56,26 @@ router.get('/tweets', (req,res) => {
   })
 })
 
+var emotions_hashed ={
+    'anger': 0,
+    'joy': 0,
+    'fear': 0,
+    'sadness': 0,
+    'surprise': 0
+}
 router.get('/sentiment', (req,res) => {
   console.log(req.query.tweet);
   // let query = req.query.tweet.text;
-  indico.emotion(req.query.tweet,{top_n: 3})
+  indico.emotion(req.query.tweet,{top_n: 2})
   .then(function(result){
     console.log(result);
+    for (var key in result) {
+    if (result.hasOwnProperty(key)) {
+        emotions_hashed[key]+= 1;
+      }
+    }
+    console.log(emotions_hashed);
+    result.emotions_hashed = emotions_hashed;
     res.json(result);
   })
   .catch(function(err){
