@@ -19,6 +19,7 @@ import { AuthInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
 import { GreetingComponent } from './greeting/greeting.component';
 import {ChartModule} from 'primeng/primeng';
+import {RouteGuard} from './route-guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,21 +38,20 @@ import {ChartModule} from 'primeng/primeng';
     HttpModule,
     HttpClientModule,
     ChartModule,
+
     RouterModule.forRoot([
       {path:'', component: GreetingComponent},
       // {path:'', redirectTo:'/greeting', pathMatch:'full'},
-      {path:'search-twitter', component: SearchTwitterComponent,pathMatch: 'full'}
-      // {path:'search-twitter',component: SearchTwitterComponent}
-      // {path:'sentiment', component: SentimentComponent},
-      // {path:'twitter-login', component: TwitterLoginComponent},
-      // // {path:'login-form', component: LoginFormComponent},
-      // {path:'registration-form', component: RegistrationFormComponent}
+      {path:'home', component: SearchTwitterComponent,pathMatch: 'full', canActivate:[RouteGuard]},
+      {path:'**', component:GreetingComponent}
+
       ])
   ],
   providers: [    
     {provide: BrowserXhr, useClass:CustExtBrowserXhr},
     TwitterUserService,
     AuthService,
+    RouteGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

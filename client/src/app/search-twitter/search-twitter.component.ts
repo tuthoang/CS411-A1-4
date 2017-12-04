@@ -15,6 +15,7 @@ export class SearchTwitterComponent{
   tweetsList: any = null;
   sentimentsList: Array<any> = [];
   item: any;
+  emotion: any;
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
 
@@ -63,7 +64,10 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
             this.sentimentsList.push(bestGuess);
-            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
+            if(this.sentimentsList.length == this.tweetsList.length) {
+              this.displayChart();
+              this.HighestEmotion();
+            }
           })
 
         }
@@ -88,13 +92,16 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
             this.sentimentsList.push(bestGuess);
-            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
+            if(this.sentimentsList.length == this.tweetsList.length) {
+              this.displayChart();
+              this.HighestEmotion();
+            }
           })
         }
       }
     });
-
   }
+
   displayChart(){
       // console.log('displaying chart');
       this.data = {
@@ -103,11 +110,11 @@ export class SearchTwitterComponent{
           {
               data: [this.array[0],this.array[1],this.array[2],this.array[3],this.array[4]],
               hoverBackgroundColor: [
-                  "#FF6371",
-                  "#36A2EB",
-                  "#FFCE45",
-                  '#FF1919',
-                  '#329932'
+                "#470215",
+                "#FFD032",
+                "#C96A19",
+                '#250396',
+                '#035C07'
               ],
               backgroundColor: [
                   "#470215",
@@ -121,6 +128,14 @@ export class SearchTwitterComponent{
       };
   }
 
+  HighestEmotion(){
+    var max = this.array.indexOf(Math.max(...this.array));
+    if (max == 0) this.emotion = 'This person is a very very angry person.';
+    else if (max == 1) this.emotion = 'Happy happy happy.';
+    else if (max == 2) this.emotion = 'Why is this person so scared?';
+    else if (max == 3) this.emotion = 'Too sad...';
+    else if (max == 4) this.emotion = 'Wow! Surprising tweets everywhere!';
+  }
 
 
   // // Move all of this into Service ?

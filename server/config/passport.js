@@ -31,7 +31,7 @@ module.exports = function(passport) {
         // res.cookie('jwt',token);
 
         if(!user){
-          console.log('creating new user');
+          // console.log('creating new user');
           user = new User({
             email: profile.emails[0].value,
             twitter: profile._json
@@ -88,7 +88,7 @@ module.exports = function(passport) {
   // opts.jwtFromRequest = cookieExtractor;
   opts.secretOrKey = config.JWTsecret.secret;
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log(jwt_payload);
+    // console.log(jwt_payload);
     User.findOne({_id: jwt_payload.id}, function(err, user) {
       if (err) {
         console.log('err');

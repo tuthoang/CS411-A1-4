@@ -13,18 +13,7 @@ export class AuthService {
       message: string,
       token: string
     }
-    return this.http.post<JSONdata>('/auth/login', credentials)
-      .subscribe(
-        // We're assuming the response will be an object
-        // with the JWT on an id_token key
-        data => {
-            if(data.success==true){
-              localStorage.setItem('jwt', data.token);
-              this.router.navigate(['search-twitter']);
-            }
-        },
-        error => console.log(error),
-      );
+    return this.http.post<JSONdata>('/auth/login', credentials);
   }
 
   getToken(): string{
@@ -32,7 +21,9 @@ export class AuthService {
   }
 
   logout() {
+    console.log('trying to remove jwt cookie');
     localStorage.removeItem('jwt');
+    localStorage.clear();
     this.router.navigate(['']);
   }
 
