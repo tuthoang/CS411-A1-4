@@ -43,15 +43,15 @@
       <br>
       <div class="alert alert-danger" *ngIf="twitterHandle.protected"> Twitter User's Tweets are Protected.</div>
       <div *ngIf="tweetsList != null">
-        <div *ngFor="let tweet of tweetsList; let i = index">
+        <div *ngFor="let i of [0,1,2,3,4]">
           <ul class="list-group">
-            <a data-toggle="collapse" href="#{{tweet.id}}"><li class="list-group-item">
-              <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
-                RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
+            <a data-toggle="collapse" href="#{{tweetsList[i].id}}"><li class="list-group-item">
+              <div *ngIf="tweetsList[i].hasOwnProperty('retweeted_status');else own_tweet">
+                RT &nbsp;@{{tweetsList[i].retweeted_status.user.screen_name}}: &nbsp; {{tweetsList[i].retweeted_status.full_text}}
               </div>
-              <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+              <ng-template #own_tweet> {{tweetsList[i].full_text}}</ng-template>
             </li></a>
-            <div id="{{tweet.id}}" class="collapse">
+            <div id="{{tweetsList[i].id}}" class="collapse">
               <h1>{{sentimentsList[i]}}</h1>
             </div>
           </ul>
@@ -63,6 +63,9 @@
 </div>
 <div *ngIf = "data">
 <p-chart type="pie" [data]="data"></p-chart>
+</div>
+<div *ngIf = "emotion">
+  {{emotion}}
 </div>
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
