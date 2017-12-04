@@ -31,13 +31,14 @@
 
 <!-- <div *ngIf="tweetsList != null">
  -->
+
 <div class="container">
 
   <div *ngIf="twitterHandle != null">
 
-    <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
+    <button (click)='open( twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button>
 
-    <div id="{{twitterHandle.screen_name}}" class="collapse jumbotron">
+    <div id="{{twitterHandle.screen_name}}" class=" jumbotron">
       <div class="text-center">
         <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
       </div>
@@ -65,7 +66,6 @@
 <div *ngIf = "data">
 <p-chart type="pie" [data]="data"></p-chart>
 </div>
-<logout></logout>
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>

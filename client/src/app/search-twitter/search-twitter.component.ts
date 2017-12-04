@@ -14,22 +14,24 @@ export class SearchTwitterComponent{
   twitterHandle: any = null;
   tweetsList: any = null;
   sentimentsList: Array<any> = [];
+  item: any;
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
+
 
   onSubmit(form : NgForm) {
     this.twitterService.getTwitterHandle(form).subscribe(data=> {
       console.log(data);
       this.twitterHandle = data[0];
     });
-    console.log('submitted');
+     this.item = form.value.searchBar;
+     this.open(this.item);
   }
 
 
-  public open(event, item){
-    console.log("getting tweets now");
+  public open(item){
     this.twitterService.getTweets(item).subscribe(data => {
       this.tweetsList = data;
-
+      console.log(this.tweetsList);
       var bestGuess;
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
