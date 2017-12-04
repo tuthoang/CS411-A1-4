@@ -1,5 +1,4 @@
 <div class="container">
-  <br />
   <div class="jumbotron">
     <div class="page-header">
       <h1 class="display-3">Hello Again!</h1>
@@ -8,15 +7,20 @@
   </div>
 </div>
 
-<div class="container text-center">
-  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)" class="form-inline">
+<div class="container">
+  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
     <div class="row">
-      <label for="searchBar"> Search for a twitter user </label>
+      <div class="form-group col-xs-5 col-lg-6">
+        <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
+        <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
+      </div>
     </div>
-    <div class="form-group">
-      <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
+
+    <div class="row">
+      <div class="col-xs-5 col-lg-6">
+        <a data-togggle="collapse" href="#user"><button type="submit" value="Submit" class="btn btn-primary">Submit</button></a>
+      </div>
     </div>
-    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 <br>
@@ -27,40 +31,51 @@
 
 <!-- <div *ngIf="tweetsList != null">
  -->
-<div class="container">
+<div *ngIf="twitterHandle != null">
 
-  <div *ngIf="twitterHandle != null">
+  <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
 
-    <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
+  <div class="row collapse" id="{{twitterHandle.screen_name}}">
+    <div class="col-sm-6">
+      <div class="col-sm-12 jumbotron">
+        <div class="row">
+          <div class="text-center">
+            <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
+          </div>
+        </div>
 
-    <div id="{{twitterHandle.screen_name}}" class="collapse jumbotron">
-      <div class="text-center">
-        <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
-      </div>
-      <br>
 
-      <div *ngIf="tweetsList != null">
-        <div *ngFor="let tweet of tweetsList; let i = index">
-          <ul class="list-group">
-            <a data-toggle="collapse" href="#{{tweet.id}}"><li class="list-group-item">
-              <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
-                RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
-              </div>
-              <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
-            </li></a>
-            <div id="{{tweet.id}}" class="collapse">
-              <h1>{{sentimentsList[i]}}</h1>
+        <div class="row">
+          <div *ngIf="tweetsList != null">
+            <div *ngFor="let tweet of tweetsList; let i = index">
+              <ul class="list-group">
+                <a data-toggle="collapse" href="#{{tweet.id}}">
+                  <li class="list-group-item">
+                    <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
+                      RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
+                    </div>
+                    <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+                  </li>
+                </a>
+                <div id="{{tweet.id}}" class="collapse">
+                  <h1>{{sentimentsList[i]}}</h1>
+                </div>
+              </ul>
             </div>
-          </ul>
+          </div>
         </div>
       </div>
-
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div *ngIf="data">
+          <p-chart type="pie" [data]="data"></p-chart>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div *ngIf = "data">
-<p-chart type="pie" [data]="data"></p-chart>
-</div>
+
 <logout></logout>
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
