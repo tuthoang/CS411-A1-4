@@ -110,18 +110,19 @@ export class SearchTwitterComponent{
           {
               data: [this.array[0],this.array[1],this.array[2],this.array[3],this.array[4]],
               hoverBackgroundColor: [
-                  "#FF6371",
-                  "#36A2EB",
-                  "#FFCE45",
-                  '#FF1919',
-                  '#329932'
+                "#470215",
+                "#FFD032",
+                "#C96A19",
+                '#250396',
+                '#035C07'
               ],
               backgroundColor: [
-                  "#FF6371",
-                  "#36A2EB",
-                  "#FFCE45",
-                  '#FF1919',
-                  '#329932'
+                  "#470215",
+                  "#FFD032",
+                  "#C96A19",
+                  '#250396',
+                  '#035C07'
+
               ]
           }]
       };

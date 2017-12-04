@@ -59,19 +59,19 @@
               </a>
               <div id="{{tweetsList[i].id}}" class="collapse">
                 <div *ngIf="sentimentsList[i] == 'anger'">
-                  <h3 class="text-center" style="color: #FF6371;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
+                  <div class="jumbotron text-center" style="background-color: #470215;color: white;"><h3 class="display-3">This tweet was most likely written in {{sentimentsList[i]}}.</h3></div>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'joy'">
-                  <h3 class="text-center" style="color: #36A2EB;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
+                  <div class="jumbotron text-center" style="background-color: #FFD032;color: white;"><h3 class="display-3">This tweet was most likely written in {{sentimentsList[i]}}.</h3></div>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'fear'">
-                  <h3 class="text-center" style="color: #FFCE45;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
+                  <div class="jumbotron text-center" style="background-color: #C96A19;color: white;"><h3 class="display-3">This tweet was most likely written in {{sentimentsList[i]}}.</h3></div>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'sadness'">
-                  <h3 class="text-center" style="color: #FF1919">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
+                  <div class="jumbotron text-center" style="background-color: #250396; color:white;"><h3 class="display-3">This tweet was most likely written in {{sentimentsList[i]}}.</h3></div>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'surprise'">
-                  <h3 class="text-center" style="color: #329932">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
+                  <div class="jumbotron text-center" style="background-color: #035C07; color: white;"><h3 class="display-3">This tweet was most likely written in {{sentimentsList[i]}}.</h3></div>
                 </div>
               </div>
             </ul>
