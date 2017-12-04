@@ -59,19 +59,19 @@
               </a>
               <div id="{{tweetsList[i].id}}" class="collapse">
                 <div *ngIf="sentimentsList[i] == 'anger'">
-                  <h3 style="color: #FF6371;">{{sentimentsList[i]}}</h3>
+                  <h3 class="text-center" style="color: #FF6371;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'joy'">
-                  <h3 style="color: #36A2EB;">{{sentimentsList[i]}}</h3>
+                  <h3 class="text-center" style="color: #36A2EB;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'fear'">
-                  <h3 style="color: #FFCE45;">{{sentimentsList[i]}}</h3>
+                  <h3 class="text-center" style="color: #FFCE45;">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'sadness'">
-                  <h3 style="color: #FF1919">{{sentimentsList[i]}}</h3>
+                  <h3 class="text-center" style="color: #FF1919">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
                 </div>
                 <div *ngIf="sentimentsList[i] == 'surprise'">
-                  <h3 style="color: #329932">{{sentimentsList[i]}}</h3>
+                  <h3 class="text-center" style="color: #329932">This tweet was most likely written in {{sentimentsList[i]}}.</h3>
                 </div>
               </div>
             </ul>
@@ -92,8 +92,9 @@
 </div>
 
 <div *ngIf = "emotion">
-  {{emotion}}
+  <h2 class="text-center">{{emotion}}</h2>
 </div>
+<br />
 
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
