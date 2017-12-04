@@ -1,26 +1,22 @@
 <div class="container">
+  <br />
   <div class="jumbotron">
     <div class="page-header">
-      <h1 class="display-3">Hello Again!</h1>
+      <h1 class="display-3">Hello!</h1>
     </div>
     <p class="lead">Get started by searching for a twitter user below!</p>
   </div>
 </div>
 
-<div class="container">
-  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
+<div class="container text-center">
+  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)" class="form-inline">
     <div class="row">
-      <div class="form-group col-xs-5 col-lg-6">
-        <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
-        <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
-      </div>
+      <label for="searchBar"> Search for a twitter user </label>
     </div>
-
-    <div class="row">
-      <div class="col-xs-5 col-lg-6">
-        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-      </div>
+    <div class="form-group">
+      <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
     </div>
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 <br>
@@ -36,14 +32,13 @@
 
   <div *ngIf="twitterHandle != null">
 
-    <button (click)='open( twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button>
 
-    <div id="{{twitterHandle.screen_name}}" class=" jumbotron">
+    <div id="{{twitterHandle.screen_name}}" class="jumbotron">
       <div class="text-center">
         <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
       </div>
       <br>
-
+      <div class="alert alert-danger" *ngIf="twitterHandle.protected"> Twitter User's Tweets are Protected.</div>
       <div *ngIf="tweetsList != null">
         <div *ngFor="let tweet of tweetsList; let i = index">
           <ul class="list-group">
@@ -87,3 +82,4 @@
     </ul>
   </div>
 </div>-->
+<logout></logout>

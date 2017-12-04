@@ -2,7 +2,7 @@
   <br />
   <div class="jumbotron">
     <div class="lander">
-      <h1>Welcome to TENTATIVE TITLE</h1>
+      <h1 class="text-center">Welcome to TENTATIVE TITLE</h1>
     </div>
     <div class="row">
       <div class="col-sm-6">
@@ -11,7 +11,7 @@
             <div class="page-header">
               <h2 class="display-2">Register Now!</h2>
             </div>
-            <p class="lead">Devise Sentiment Analysis</p>
+            <p class="lead">Sign Up to Perform Sentiment Analysis on Tweets</p>
             <br>
             <form [formGroup]="rForm" (ngSubmit)="Register(rForm.value)">
 
@@ -21,6 +21,7 @@
                   <div class="form-group">
                     <label>Email</label>
                     <input class="form-control" placeholder="Enter Email..." formControlName="email" (focus)="emailFocus = true" (blur)="emailFocus = false" name="email">
+
                   </div>
 
                   <div class="form-group">
@@ -53,7 +54,7 @@
             <div class="page-header">
               <h2 class="display-2">Already Have an Account?</h2>
             </div>
-            <p class="lead">Sign Back In!</p>
+            <p class="lead">Sign In!</p>
             <br>
             <form #loginForm = "ngForm" (ngSubmit) = "Login(loginForm)">
               <div class="col-sm-12">
@@ -62,7 +63,7 @@
                     <div class="row">
                       <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" ngModel name="email" placeholder="Insert Email...">
+                        <input class="form-control" ngModel name="email" placeholder="Insert Email">
                       </div>
 
                       <div class="form-group">

@@ -37,6 +37,7 @@ router.get('/search', (req, res) => {
   .then(function(result) {
       // console.log(result);
       res.json(result.data);
+      // res.send(result.data)
   })
   .catch(function (err){
     console.log("FOUND ERROR: " + err.message)
@@ -46,7 +47,7 @@ router.get('/search', (req, res) => {
 router.get('/tweets', (req,res) => {
   T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 10, tweet_mode: 'extended'})
   .then(function(result){
-    // console.log(result.data[0].full_text)
+    // console.log(result.data[0].text)
     // console.log('-------------'+result.data[0].retweeted_status.full_text);
     res.json(result.data)
   })
@@ -60,11 +61,6 @@ router.get('/sentiment', (req,res) => {
   // let query = req.query.tweet.text;
   indico.emotion(req.query.tweet,{top_n: 1})
   .then(function(result){
-    for (var key in result) {
-    if (result.hasOwnProperty(key)) {
-        emotions_hashed[key]+= 1;
-      }
-    }
     res.json(result);
   })
   .catch(function(err){
