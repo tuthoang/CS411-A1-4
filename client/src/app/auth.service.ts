@@ -9,8 +9,8 @@ export class AuthService {
 
   login(credentials) {
     interface JSONdata{
-      success: boolean, 
-      message: string, 
+      success: boolean,
+      message: string,
       token: string
     }
     return this.http.post<JSONdata>('/auth/login', credentials)
@@ -35,12 +35,13 @@ export class AuthService {
   logout() {
     localStorage.removeItem('jwt');
     // localStorage.removeItem("expires_at");
+    this.router.navigate(['']);
   }
 
   public isAuthenticated(): boolean {
     // get the token
     const token = this.getToken();
-    // return a boolean reflecting 
+    // return a boolean reflecting
     // whether or not the token is expired
     if (token) return true;
     return false;
