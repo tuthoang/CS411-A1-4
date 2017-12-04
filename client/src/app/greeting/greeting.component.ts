@@ -75,7 +75,7 @@ export class GreetingComponent  {
             }
         },
         error => console.log('error'),
-      );;
+      );
     }
   }
 

@@ -92,7 +92,6 @@ router.post("/logout", passport.authenticate('jwt', {session:false}),
     res.json({message:"You've logged out"});
   })
 
-// use res.header or something like that
 router.get("/secret", passport.authenticate('jwt', { session: false }), 
   function(req, res){
     console.log('accessed secret');
