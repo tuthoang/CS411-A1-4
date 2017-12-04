@@ -56,7 +56,7 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'fear') this.array[2]+=1;
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
-            this.sentimentsList.push(bestGuess);
+            this.sentimentsList.push("This tweet was most likely written with " + bestGuess + ".");
             if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
 
@@ -81,7 +81,7 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'fear') this.array[2]+=1;
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
-            this.sentimentsList.push(bestGuess);
+            this.sentimentsList.push("This tweet was most likely written with " + bestGuess + ".");
             if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
         }
