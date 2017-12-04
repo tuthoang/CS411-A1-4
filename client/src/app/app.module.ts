@@ -11,9 +11,7 @@ import { SearchTwitterComponent } from './search-twitter/search-twitter.componen
 import { RouterModule, Routes } from '@angular/router';
 import { SentimentComponent } from './sentiment/sentiment.component';
 import { TwitterLoginComponent } from './twitter-login/twitter-login.component';
-import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { TwitterUserService } from './twitter-user.service';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { LogoutComponent } from './logout/logout.component'
 import { AuthInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
@@ -26,8 +24,6 @@ import {RouteGuard} from './route-guard';
     SearchTwitterComponent,
     SentimentComponent,
     TwitterLoginComponent,
-    RegistrationFormComponent,
-    LoginFormComponent,
     LogoutComponent,
     GreetingComponent
   ],
@@ -47,7 +43,7 @@ import {RouteGuard} from './route-guard';
 
       ])
   ],
-  providers: [    
+  providers: [
     {provide: BrowserXhr, useClass:CustExtBrowserXhr},
     TwitterUserService,
     AuthService,
