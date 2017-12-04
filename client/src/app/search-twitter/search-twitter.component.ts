@@ -132,7 +132,7 @@ export class SearchTwitterComponent{
     if (max == 0) this.emotion = 'This person is a very very angry person.';
     else if (max == 1) this.emotion = 'Happy happy happy.';
     else if (max == 2) this.emotion = 'Why is this person so scared?';
-    else if (max == 3) this.emotion = 'Too sad...';
+    else if (max == 3) this.emotion = 'Very sad...';
     else if (max == 4) this.emotion = 'Wow! Surprising tweets everywhere!';
   }
 
