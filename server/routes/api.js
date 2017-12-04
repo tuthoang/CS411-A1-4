@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   res.send('api works');
 });
 
-router.get('/me', (req, res) => {
+router.get('/me', passport.authenticate('jwt', {session:false}),(req, res) => {
   var token = req.headers['x-access-token'];
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
@@ -32,7 +32,7 @@ router.get('/me', (req, res) => {
   });
 });
 
-router.get('/search', (req, res) => {
+router.get('/search', passport.authenticate('jwt', {session:false}),(req, res) => {
   T.get('users/lookup', { screen_name: req.query.searchBar })
   .then(function(result) {
       // console.log(result);
@@ -44,7 +44,7 @@ router.get('/search', (req, res) => {
   })
 })
 
-router.get('/tweets', (req,res) => {
+router.get('/tweets', passport.authenticate('jwt', {session:false}),(req,res) => {
   T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 50, tweet_mode: 'extended'})
   .then(function(result){
     // console.log(result.data[0].text)
@@ -56,7 +56,7 @@ router.get('/tweets', (req,res) => {
   })
 })
 
-router.get('/sentiment', (req,res) => {
+router.get('/sentiment', passport.authenticate('jwt', {session:false}),(req,res) => {
   // console.log(req.query.tweet);
   // let query = req.query.tweet.text;
   indico.emotion(req.query.tweet,{top_n: 1})

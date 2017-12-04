@@ -71,6 +71,7 @@
                         <input class="form-control" ngModel type="password" name="password" placeholder="Enter password">
                       </div>
                     </div>
+                    <div class="alert alert-danger" *ngIf="loginError!=''"> {{loginError}} </div>
                     <button type="submit" class="btn btn-success" value="Submit">Login!</button>
 
                 </div>
