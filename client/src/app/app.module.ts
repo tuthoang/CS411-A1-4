@@ -18,8 +18,7 @@ import { LogoutComponent } from './logout/logout.component'
 import { AuthInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
 import { GreetingComponent } from './greeting/greeting.component';
-// import { UIChart }  from 'primeng/primeng';
-
+import {ChartModule} from 'primeng/primeng';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +36,7 @@ import { GreetingComponent } from './greeting/greeting.component';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    // UIChart,
+    ChartModule,
     RouterModule.forRoot([
       {path:'', component: GreetingComponent},
       // {path:'', redirectTo:'/greeting', pathMatch:'full'},

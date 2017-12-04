@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { TwitterUserService } from '../twitter-user.service';
+
 @Component({
   selector: 'search-twitter',
   templateUrl: './search-twitter.component.html',
-  styleUrls: ['./search-twitter.component.css']
+  styleUrls: ['./search-twitter.component.css'],
 })
 export class SearchTwitterComponent{
-
+  data: any = null;
+  array: Array<any> = [0,0,0,0,0];
   twitterHandle: any = null;
   tweetsList: any = null;
   sentimentsList: Array<any> = [];
@@ -27,10 +29,7 @@ export class SearchTwitterComponent{
     console.log("getting tweets now");
     this.twitterService.getTweets(item).subscribe(data => {
       this.tweetsList = data;
-      // console.log(this.tweetsList[0].text);
-    // for(let tweet of this.tweetsList){
-    //   console.log(tweet.text);
-    // }
+
       var bestGuess;
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
@@ -47,9 +46,17 @@ export class SearchTwitterComponent{
                   maxVal = temp[key];
                   bestGuess = key;
               }
+
             }
+            if(bestGuess == 'anger') this.array[0]+=1;
+            else if(bestGuess == 'joy') this.array[1]+=1;
+            else if(bestGuess == 'fear') this.array[2]+=1;
+            else if(bestGuess == 'sadness') this.array[3]+=1;
+            else this.array[4]+=1;            
             this.sentimentsList.push(bestGuess);
+            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();       
           })
+
         }
         else{
           this.twitterService.sentimentAnalysis(tweet.full_text).subscribe(data => {
@@ -64,15 +71,47 @@ export class SearchTwitterComponent{
                   maxVal = temp[key];
                   bestGuess = key;
               }
-            }
-            this.sentimentsList.push(bestGuess);
 
+            }
+            if(bestGuess == 'anger') this.array[0]+=1;
+            else if(bestGuess == 'joy') this.array[1]+=1;
+            else if(bestGuess == 'fear') this.array[2]+=1;
+            else if(bestGuess == 'sadness') this.array[3]+=1;
+            else this.array[4]+=1;
+            this.sentimentsList.push(bestGuess);
+            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
         }
       }
     });
 
   }
+  displayChart(){
+      console.log('displaying chart');
+      this.data = {
+      labels: ['anger','joy','fear', 'sadness', 'surprise'],
+      datasets: [
+          {
+              data: [this.array[0],this.array[1],this.array[2],this.array[3],this.array[4]],                    
+              hoverBackgroundColor: [
+                  "#FF6371",
+                  "#36A2EB",
+                  "#FFCE45",
+                  '#FF1919',
+                  '#329932'
+              ],
+              backgroundColor: [
+                  "#FF6371",
+                  "#36A2EB",
+                  "#FFCE45",
+                  '#FF1919',
+                  '#329932'
+
+              ]
+          }]    
+      };
+  }
+  
 
 
   // // Move all of this into Service ?
