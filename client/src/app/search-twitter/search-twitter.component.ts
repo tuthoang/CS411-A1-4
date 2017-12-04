@@ -110,11 +110,11 @@ export class SearchTwitterComponent{
                   '#329932'
               ],
               backgroundColor: [
-                  "#FF6371",
-                  "#36A2EB",
-                  "#FFCE45",
-                  '#FF1919',
-                  '#329932'
+                  "#470215",
+                  "#FFD032",
+                  "#C96A19",
+                  '#250396',
+                  '#035C07'
 
               ]
           }]
