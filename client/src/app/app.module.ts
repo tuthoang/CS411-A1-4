@@ -18,6 +18,7 @@ import { LogoutComponent } from './logout/logout.component'
 import { AuthInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
 import { GreetingComponent } from './greeting/greeting.component';
+// import { UIChart }  from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,12 @@ import { GreetingComponent } from './greeting/greeting.component';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    // UIChart,
     RouterModule.forRoot([
       {path:'', component: GreetingComponent},
+      // {path:'', redirectTo:'/greeting', pathMatch:'full'},
       {path:'search-twitter', component: SearchTwitterComponent,pathMatch: 'full'}
-      // {path:'search-twitter',component: SearchTwitterComponent},
+      // {path:'search-twitter',component: SearchTwitterComponent}
       // {path:'sentiment', component: SentimentComponent},
       // {path:'twitter-login', component: TwitterLoginComponent},
       // // {path:'login-form', component: LoginFormComponent},
