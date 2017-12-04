@@ -31,9 +31,9 @@
 
   <div *ngIf="twitterHandle != null">
 
-    <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
+    <!-- <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open(twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a> -->
 
-    <div id="{{twitterHandle.screen_name}}" class="collapse jumbotron">
+    <div id="{{twitterHandle.screen_name}}" class="jumbotron">
       <div class="text-center">
         <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
       </div>
