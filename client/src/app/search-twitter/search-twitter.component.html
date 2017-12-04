@@ -27,11 +27,11 @@
 
 <!-- <div *ngIf="tweetsList != null">
  -->
+
 <div class="container">
 
   <div *ngIf="twitterHandle != null">
 
-    <!-- <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open(twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a> -->
 
     <div id="{{twitterHandle.screen_name}}" class="jumbotron">
       <div class="text-center">
@@ -41,7 +41,7 @@
         </div>
       </div>
       <br>
-
+      <div class="alert alert-danger" *ngIf="twitterHandle.protected"> Twitter User's Tweets are Protected.</div>
       <div *ngIf="tweetsList != null">
         <div *ngFor="let tweet of tweetsList; let i = index">
           <ul class="list-group">
@@ -64,7 +64,6 @@
 <div *ngIf = "data">
 <p-chart type="pie" [data]="data"></p-chart>
 </div>
-<logout></logout>
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
@@ -86,3 +85,4 @@
     </ul>
   </div>
 </div>-->
+<logout></logout>

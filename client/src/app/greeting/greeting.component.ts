@@ -50,7 +50,6 @@ export class GreetingComponent  {
   Register(form) {
     this.http.post('/auth/create', form).subscribe(
         data=>{
-          console.log(data);
           this.message = data;
         }
       );
