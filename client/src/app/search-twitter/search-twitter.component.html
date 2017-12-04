@@ -1,4 +1,5 @@
 <div class="container">
+  <br />
   <div class="jumbotron">
     <div class="page-header">
       <h1 class="display-3">Hello Again!</h1>
@@ -7,20 +8,15 @@
   </div>
 </div>
 
-<div class="container">
-  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
+<div class="container text-center">
+  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)" class="form-inline">
     <div class="row">
-      <div class="form-group col-xs-5 col-lg-6">
-        <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
-        <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
-      </div>
+      <label for="searchBar"> Search for a twitter user </label>
     </div>
-
-    <div class="row">
-      <div class="col-xs-5 col-lg-6">
-        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-      </div>
+    <div class="form-group">
+      <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
     </div>
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 <br>
