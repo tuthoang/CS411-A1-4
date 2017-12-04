@@ -41,25 +41,25 @@
         </div>
         <br>
 
-        <div class="row">
-          <div *ngIf="tweetsList != null">
-            <div *ngFor="let tweet of tweetsList; let i = index">
-              <ul class="list-group">
-                <a data-toggle="collapse" href="#{{tweet.id}}">
-                  <li class="list-group-item">
-                    <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
-                      RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
-                    </div>
-                    <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
-                  </li>
-                </a>
-                <div id="{{tweet.id}}" class="collapse">
-                  <h1>{{sentimentsList[i]}}</h1>
-                </div>
-              </ul>
-            </div>
+
+        <div *ngIf="tweetsList != null">
+          <div *ngFor="let tweet of tweetsList; let i = index">
+            <ul class="list-group">
+              <a data-toggle="collapse" href="#{{tweet.id}}">
+                <li class="list-group-item">
+                  <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
+                    RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
+                  </div>
+                  <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
+                </li>
+              </a>
+              <div id="{{tweet.id}}" class="collapse">
+                <h1>{{sentimentsList[i]}}</h1>
+              </div>
+            </ul>
           </div>
         </div>
+
       </div>
     </div>
     <div class="col-sm-6">
