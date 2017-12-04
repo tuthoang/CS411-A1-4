@@ -49,11 +49,17 @@ export class GreetingComponent  {
   }
 
   Register(form) {
-    this.http.post('/auth/create', form).subscribe(
+    interface regJSON{
+      message: string,
+      valid: boolean
+    }
+    this.http.post<regJSON>('/auth/create', form).subscribe(
         data=>{
           this.message = data;
+          if(data.valid == true) this.rForm.reset();
         }
       );
+
   }
   Login(form:NgForm){
     if(form.value. email && form.value.password){
