@@ -23,7 +23,7 @@ export class SearchTwitterComponent{
     this.array = [0,0,0,0,0];
     this.tweetsList = null;
     this.sentimentsList = [];
- 
+
     this.twitterService.getTwitterHandle(form).subscribe(data=> {
       // console.log(data);
       this.twitterHandle = data[0];
@@ -62,7 +62,7 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'fear') this.array[2]+=1;
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
-            this.sentimentsList.push("This tweet was most likely written with " + bestGuess + ".");
+            this.sentimentsList.push(bestGuess);
             if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
 
@@ -87,7 +87,7 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'fear') this.array[2]+=1;
             else if(bestGuess == 'sadness') this.array[3]+=1;
             else this.array[4]+=1;
-            this.sentimentsList.push("This tweet was most likely written with " + bestGuess + ".");
+            this.sentimentsList.push(bestGuess);
             if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
         }
