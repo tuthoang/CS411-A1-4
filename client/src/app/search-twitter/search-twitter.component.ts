@@ -17,22 +17,28 @@ export class SearchTwitterComponent{
   item: any;
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
+
   onSubmit(form : NgForm) {
+    this.data = null;
+    this.array = [0,0,0,0,0];
+    this.tweetsList = null;
+    this.sentimentsList = [];
+ 
     this.twitterService.getTwitterHandle(form).subscribe(data=> {
-      console.log(data);
+      // console.log(data);
       this.twitterHandle = data[0];
     });
     this.item = form.value.searchBar;
     this.open(this.item);
-    console.log('submitted');
+    // console.log('submitted');
   }
 
 
   public open(item){
-    console.log("getting tweets now");
+
     this.twitterService.getTweets(item).subscribe(data => {
       this.tweetsList = data;
-
+      // console.log(this.tweetsList);
       var bestGuess;
       this.sentimentsList = [];
       for(let tweet of this.tweetsList){
@@ -90,7 +96,7 @@ export class SearchTwitterComponent{
 
   }
   displayChart(){
-      console.log('displaying chart');
+      // console.log('displaying chart');
       this.data = {
       labels: ['anger','joy','fear', 'sadness', 'surprise'],
       datasets: [

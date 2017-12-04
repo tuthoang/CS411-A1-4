@@ -28,13 +28,11 @@ export class AuthService {
   }
 
   getToken(): string{
-    console.log(localStorage.getItem('jwt'));
     return localStorage.getItem('jwt');
   }
 
   logout() {
     localStorage.removeItem('jwt');
-    // localStorage.removeItem("expires_at");
     this.router.navigate(['']);
   }
 
