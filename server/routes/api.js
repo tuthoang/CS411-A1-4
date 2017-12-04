@@ -45,7 +45,7 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/tweets', (req,res) => {
-  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 5, tweet_mode: 'extended'})
+  T.get('/statuses/user_timeline', {screen_name: req.query.screen_name, count: 10, tweet_mode: 'extended'})
   .then(function(result){
     // console.log(result.data[0].text)
     // console.log('-------------'+result.data[0].retweeted_status.full_text);
@@ -66,7 +66,7 @@ var emotions_hashed ={
 router.get('/sentiment', (req,res) => {
   console.log(req.query.tweet);
   // let query = req.query.tweet.text;
-  indico.emotion(req.query.tweet,{top_n: 2})
+  indico.emotion(req.query.tweet,{top_n: 1})
   .then(function(result){
     console.log(result);
     for (var key in result) {
