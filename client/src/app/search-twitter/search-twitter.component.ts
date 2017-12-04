@@ -14,6 +14,7 @@ export class SearchTwitterComponent{
   twitterHandle: any = null;
   tweetsList: any = null;
   sentimentsList: Array<any> = [];
+  item: any;
   constructor(private twitterService : TwitterUserService, public http : HttpClient){}
 
   onSubmit(form : NgForm) {
@@ -21,11 +22,13 @@ export class SearchTwitterComponent{
       console.log(data);
       this.twitterHandle = data[0];
     });
+    this.item = form.value.searchBar;
+    this.open(this.item);
     console.log('submitted');
   }
 
 
-  public open(event, item){
+  public open(item){
     console.log("getting tweets now");
     this.twitterService.getTweets(item).subscribe(data => {
       this.tweetsList = data;
@@ -52,9 +55,9 @@ export class SearchTwitterComponent{
             else if(bestGuess == 'joy') this.array[1]+=1;
             else if(bestGuess == 'fear') this.array[2]+=1;
             else if(bestGuess == 'sadness') this.array[3]+=1;
-            else this.array[4]+=1;            
+            else this.array[4]+=1;
             this.sentimentsList.push(bestGuess);
-            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();       
+            if(this.sentimentsList.length == this.tweetsList.length) this.displayChart();
           })
 
         }
@@ -92,7 +95,7 @@ export class SearchTwitterComponent{
       labels: ['anger','joy','fear', 'sadness', 'surprise'],
       datasets: [
           {
-              data: [this.array[0],this.array[1],this.array[2],this.array[3],this.array[4]],                    
+              data: [this.array[0],this.array[1],this.array[2],this.array[3],this.array[4]],
               hoverBackgroundColor: [
                   "#FF6371",
                   "#36A2EB",
@@ -108,10 +111,10 @@ export class SearchTwitterComponent{
                   '#329932'
 
               ]
-          }]    
+          }]
       };
   }
-  
+
 
 
   // // Move all of this into Service ?
