@@ -7,20 +7,16 @@
   </div>
 </div>
 
-<div class="container">
-  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)">
+<div class="container text-center">
+  <form #twitterForm="ngForm" (ngSubmit)="onSubmit(twitterForm)" class="form-inline">
     <div class="row">
-      <div class="form-group col-xs-5 col-lg-6">
-        <label class="col-form-label" for="searchBar"> Search for a twitter user </label>
-        <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
-      </div>
+      <label for="searchBar"> Search for a twitter user </label>
+    </div>
+    <div class="form-group">
+      <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
     </div>
 
-    <div class="row">
-      <div class="col-xs-5 col-lg-6">
-        <a data-togggle="collapse" href="#user"><button type="submit" value="Submit" class="btn btn-primary">Submit</button></a>
-      </div>
-    </div>
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 <br>
@@ -33,10 +29,8 @@
  -->
 <div *ngIf="twitterHandle != null">
 
-  <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open($event, twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a>
-
   <!-- <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open(twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a> -->
-  <div class="row collapse" id="{{twitterHandle.screen_name}}">
+  <div class="row" id="{{twitterHandle.screen_name}}">
     <div class="col-sm-6">
       <div class="jumbotron">
         <div class="text-center">
