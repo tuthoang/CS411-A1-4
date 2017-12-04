@@ -40,14 +40,14 @@ app.all('/*', function(req, res, next) {
 });
 
 
-app.use(session({
-  secret: 'mysecret',
-  resave: false,
-  saveUninitialized: true
-}))
+// app.use(session({
+//   secret: 'mysecret',
+//   resave: false,
+//   saveUninitialized: true
+// }))
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 // app.use(flash());
 // const passportRoute = require('./routes/passport')(passport);
 

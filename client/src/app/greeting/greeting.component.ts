@@ -23,6 +23,7 @@ export class GreetingComponent  {
   mismatch:string = 'Passwords dont match';
   matchPW: boolean = false;
   emailFocus: boolean = false;
+  loginError: string = '';
   message: Object;
   constructor(private auth: AuthService,private fb: FormBuilder, public http: HttpClient, public router: Router){
     this.rForm = fb.group({
@@ -56,7 +57,19 @@ export class GreetingComponent  {
   }
   Login(form:NgForm){
     if(form.value. email && form.value.password){
-      this.auth.login(form.value);
+      this.auth.login(form.value).subscribe(
+        data => {
+            if(data.success==true){
+              console.log(data.success)
+              localStorage.setItem('jwt', data.token);
+              this.router.navigate(['search-twitter']);
+            }
+            else{
+              this.loginError = "Incorrect Login Info";
+            }
+        },
+        error => console.log('error'),
+      );;
     }
   }
 
