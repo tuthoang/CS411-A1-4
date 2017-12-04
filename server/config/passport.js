@@ -95,10 +95,8 @@ module.exports = function(passport) {
         return done(err, false);
       }
       if (user) {
-        console.log(user);
         done(null, user);
       } else {
-        console.log('no user');
         done(null, false);
       }
     });
