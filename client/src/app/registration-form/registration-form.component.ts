@@ -25,9 +25,22 @@ export class RegistrationFormComponent {
       'email' : [null, Validators.compose([Validators.email,Validators.required])],
       'password' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
       'confirmPassword' : [null, Validators.compose([Validators.required,Validators.minLength(5)])],
-      validator: PasswordValidation.MatchPassword // custom validation method
-      });
+    },
+    {validator: this.checkIfMatchingPasswords('password', 'confirmPassword')});
     // this.test();
+  }
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      let passwordInput = group.controls[passwordKey],
+          passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({notEquivalent: true})
+      }
+      else {
+          return passwordConfirmationInput.setErrors(null);
+      }
+    }
   }
 
   onSubmit(form) {
