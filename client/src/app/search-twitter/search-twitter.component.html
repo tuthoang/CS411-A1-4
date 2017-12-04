@@ -19,6 +19,7 @@
     <div class="form-group">
       <input ngModel type="text" class="form-control" id="searchBar" name="searchBar" placeholder="Insert Twitter User" #twitterUser="ngModel">
     </div>
+
     <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
@@ -30,43 +31,70 @@
 
 <!-- <div *ngIf="tweetsList != null">
  -->
+<div *ngIf="twitterHandle != null">
 
-<div class="container">
-
-  <div *ngIf="twitterHandle != null">
-
-
-    <div id="{{twitterHandle.screen_name}}" class="jumbotron">
-      <div class="text-center">
-        <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
-        <div clas="row">
-          <label>{{twitterHandle.screen_name}}</label>
+  <!-- <a data-toggle="collapse" href="#{{twitterHandle.screen_name}}"><button (click)='open(twitterHandle.screen_name)' class="btn btn-info btn-lg">{{twitterHandle.screen_name}}</button></a> -->
+  <div class="row" id="{{twitterHandle.screen_name}}">
+    <div class="col-sm-6">
+      <div class="jumbotron">
+        <div class="text-center">
+          <img class="img-thumbnail" src="{{twitterHandle.profile_image_url_https}}" height="15%" width="15%" />
+          <div clas="row">
+            <label>{{twitterHandle.screen_name}}</label>
+          </div>
         </div>
-      </div>
-      <br>
-      <div class="alert alert-danger" *ngIf="twitterHandle.protected"> Twitter User's Tweets are Protected.</div>
-      <div *ngIf="tweetsList != null">
-        <div *ngFor="let tweet of tweetsList; let i = index">
-          <ul class="list-group">
-            <a data-toggle="collapse" href="#{{tweet.id}}"><li class="list-group-item">
-              <div *ngIf="tweet.hasOwnProperty('retweeted_status');else own_tweet">
-                RT &nbsp;@{{tweet.retweeted_status.user.screen_name}}: &nbsp; {{tweet.retweeted_status.full_text}}
+        <br>
+
+        <div class="alert alert-danger" *ngIf="twitterHandle.protected"> Twitter User's Tweets are Protected.</div>
+        <div *ngIf="tweetsList != null">
+          <div *ngFor="let i of [0,1,2,3,4]">
+            <ul class="list-group">
+              <a data-toggle="collapse" href="#{{tweetsList[i].id}}">
+                <li class="list-group-item">
+                  <div *ngIf="tweetsList[i].hasOwnProperty('retweeted_status');else own_tweet">
+                    RT &nbsp;@{{tweetsList[i].retweeted_status.user.screen_name}}: &nbsp; {{tweetsList[i].retweeted_status.full_text}}
+                  </div>
+                  <ng-template #own_tweet> {{tweetsList[i].full_text}}</ng-template>
+                </li>
+              </a>
+              <div id="{{tweetsList[i].id}}" class="collapse">
+                <div *ngIf="sentimentsList[i] == 'anger'">
+                  <h3 style="color: #FF6371;">{{sentimentsList[i]}}</h3>
+                </div>
+                <div *ngIf="sentimentsList[i] == 'joy'">
+                  <h3 style="color: #36A2EB;">{{sentimentsList[i]}}</h3>
+                </div>
+                <div *ngIf="sentimentsList[i] == 'fear'">
+                  <h3 style="color: #FFCE45;">{{sentimentsList[i]}}</h3>
+                </div>
+                <div *ngIf="sentimentsList[i] == 'sadness'">
+                  <h3 style="color: #FF1919">{{sentimentsList[i]}}</h3>
+                </div>
+                <div *ngIf="sentimentsList[i] == 'surprise'">
+                  <h3 style="color: #329932">{{sentimentsList[i]}}</h3>
+                </div>
               </div>
-              <ng-template #own_tweet> {{tweet.full_text}}</ng-template>
-            </li></a>
-            <div id="{{tweet.id}}" class="collapse">
-              <h3>{{sentimentsList[i]}}</h3>
-            </div>
-          </ul>
+            </ul>
+          </div>
         </div>
+
       </div>
 
     </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div *ngIf="data">
+          <p-chart type="pie" [data]="data"></p-chart>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div *ngIf = "data">
-<p-chart type="pie" [data]="data"></p-chart>
+
+<div *ngIf = "emotion">
+  {{emotion}}
 </div>
+
 <!-- <div *ngIf="tweetsList != null">
   <div *ngFor="let tweet of tweetsList">
     <ul>
