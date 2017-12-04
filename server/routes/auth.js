@@ -69,8 +69,8 @@ router.post("/login", function(req, res) {
         var token = jwt.sign(payload, config.JWTsecret.secret, {
           expiresIn: 24*24*60
         });
-        console.log('logging');
-        res.cookie('jwt',token);
+        // console.log('logging');
+        // res.cookie('jwt',token);
         res.json({
           success: true, 
           message: "Receiving Token",

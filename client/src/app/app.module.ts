@@ -42,7 +42,7 @@ import {RouteGuard} from './route-guard';
     RouterModule.forRoot([
       {path:'', component: GreetingComponent},
       // {path:'', redirectTo:'/greeting', pathMatch:'full'},
-      {path:'search-twitter', component: SearchTwitterComponent,pathMatch: 'full', canActivate:[RouteGuard]},
+      {path:'home', component: SearchTwitterComponent,pathMatch: 'full', canActivate:[RouteGuard]},
       {path:'**', component:GreetingComponent}
 
       ])
